@@ -8,7 +8,6 @@
     tools:context=".MainActivity">
 
     <LinearLayout
-        android:id="@+id/item_edit_text"
         android:autofillHints="Enter Item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -17,6 +16,7 @@
         android:orientation="horizontal"
         >
         <EditText
+            android:id="@+id/item_edit_text"
             android:layout_width="0dp"
             android:layout_weight="4"
             android:layout_height="wrap_content" />
