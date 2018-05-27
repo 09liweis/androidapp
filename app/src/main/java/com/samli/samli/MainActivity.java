@@ -28,19 +28,11 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.logging.FileHandler;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
-
-    private EditText itemET;
-    private Button btn;
-    private ListView itemsList;
-
-    private ArrayList<String> items;
-    private ArrayAdapter<String> adapter;
+public class MainActivity extends AppCompatActivity {
 
     //todo list
     RequestQueue requestQueue;
     String todoAPI = "http://samliweisen.herokuapp.com/api/todos";
-    private TextView todoListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,21 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-
-        itemET = findViewById(R.id.item_edit_text);
-        btn = findViewById(R.id.add_btn);
-        itemsList = findViewById(R.id.items_list);
-
-        items = FIleHelper.readData(this);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, items);
-        itemsList.setAdapter(adapter);
-
-        btn.setOnClickListener(this);
-        itemsList.setOnItemClickListener(this);
-
         //call todo list api
-        todoListView = findViewById(R.id.todo_list);
-        todoListView.setMovementMethod(new ScrollingMovementMethod());
 
     }
 
@@ -97,26 +75,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
         );
         requestQueue.add(jsonArrayRequest);
-    }
-
-    @Override
-    public void onClick(View v) {
-        getTodoList();
-        switch (v.getId()) {
-            case R.id.add_btn:
-                String itemEntered = itemET.getText().toString();
-                adapter.add(itemEntered);
-                itemET.setText("");
-                FIleHelper.writeData(items, this);
-                Toast.makeText(this, "Item Added", Toast.LENGTH_SHORT).show();
-                break;
-        }
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        items.remove(i);
-        adapter.notifyDataSetChanged();
-        Toast.makeText(this, "Delete", Toast.LENGTH_SHORT).show();
     }
 }
