@@ -30,10 +30,13 @@ public class FIleHelper {
         try {
             FileInputStream fis = context.openFileInput(FILENAME);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            itemsList = new ArrayList<>();
+            itemsList = (ArrayList<String>) ois.readObject();
         } catch (FileNotFoundException e) {
+            itemsList = new ArrayList<>();
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 
