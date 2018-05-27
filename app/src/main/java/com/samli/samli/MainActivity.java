@@ -76,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //call todo list api
         todoListView = findViewById(R.id.todo_list);
         todoListView.setMovementMethod(new ScrollingMovementMethod());
-        getTodoList();
 
     }
 
@@ -102,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        getTodoList();
         switch (v.getId()) {
             case R.id.add_btn:
                 String itemEntered = itemET.getText().toString();
