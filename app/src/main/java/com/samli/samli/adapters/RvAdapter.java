@@ -16,6 +16,11 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.DataViewHolder> {
     private Context mContext;
     private ArrayList<String> mList;
 
+    public RvAdapter(Context mContext, ArrayList<String> mList) {
+        this.mContext = mContext;
+        this.mList = mList;
+    }
+
     @Override
     public DataViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item,null);
