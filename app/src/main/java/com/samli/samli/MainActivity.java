@@ -24,11 +24,14 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.samli.samli.adapters.RvAdapter;
 import com.samli.samli.models.FIleHelper;
+import com.samli.samli.models.Todo;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.FileHandler;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     RvAdapter rvAdapter;
 
     //todo list
+    ArrayList<Todo> todoList;
     RequestQueue requestQueue;
     String todoAPI = "http://samliweisen.herokuapp.com/api/todos";
 
@@ -45,41 +49,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        todoList = new ArrayList<Todo>();
         rv = (RecyclerView) findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
 
-        ArrayList<String> arrayList = new ArrayList<>();
-        for (int i=0;i<50;i++){
-            arrayList.add("第"+i+"条数据");
-        }
-        rvAdapter = new RvAdapter(this, arrayList);
-        rv.setAdapter(rvAdapter);
-
-        String api = "https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&tpl=3&page=detail&type=top&topid=36&_=1520777874472";
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-                Request.Method.GET, api, null, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
-                Log.d("TAG", response.toString());
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
 
         //call todo list api
+        getTodoList();
 
     }
 
     public void getTodoList() {
-        requestQueue = Volley.newRequestQueue(this);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(todoAPI,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray jsonArray) {
-                        Log.d("", jsonArray.toString());
+                        handleTodoJSON(jsonArray);
                     }
 
                 },
@@ -90,6 +75,26 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         );
+        requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
+    }
+
+    public void handleTodoJSON(JSONArray jsonArray) {
+        for(int i = 0; i < jsonArray.length(); i++) {
+            Todo todo = new Todo();
+            JSONObject json = null;
+            try {
+                json = jsonArray.getJSONObject(i);
+                todo.setId(json.getString("_id"));
+                todo.setName(json.getString("name"));
+                todo.setStatus(json.getString("status"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            todoList.add(todo);
+        }
+        System.out.print(todoList);
+        rvAdapter = new RvAdapter(this, todoList);
+        rv.setAdapter(rvAdapter);
     }
 }

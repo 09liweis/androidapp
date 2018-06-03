@@ -5,6 +5,10 @@ public class Todo {
     String _id;
     String status;
 
+    public Todo() {
+
+    }
+
     public Todo(String _id, String name, String status) {
         this._id = _id;
         this.name = name;
