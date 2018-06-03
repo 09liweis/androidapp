@@ -22,7 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.samli.samli.adapters.RvAdapter;
+import com.samli.samli.adapters.TodoListAdapter;
 import com.samli.samli.models.FIleHelper;
 import com.samli.samli.models.Todo;
 
@@ -37,7 +37,7 @@ import java.util.logging.FileHandler;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView rv;
-    RvAdapter rvAdapter;
+    TodoListAdapter todoListAdapter;
 
     //todo list
     ArrayList<Todo> todoList;
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
             todoList.add(todo);
         }
         System.out.print(todoList);
-        rvAdapter = new RvAdapter(this, todoList);
-        rv.setAdapter(rvAdapter);
+        todoListAdapter = new TodoListAdapter(this, todoList);
+        rv.setAdapter(todoListAdapter);
     }
 }

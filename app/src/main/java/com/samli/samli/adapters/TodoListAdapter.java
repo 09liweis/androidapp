@@ -12,12 +12,12 @@ import com.samli.samli.models.Todo;
 
 import java.util.ArrayList;
 
-public class RvAdapter extends RecyclerView.Adapter<RvAdapter.DataViewHolder> {
+public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataViewHolder> {
 
     private Context mContext;
     private ArrayList<Todo> todoList;
 
-    public RvAdapter(Context mContext, ArrayList<Todo> todoList) {
+    public TodoListAdapter(Context mContext, ArrayList<Todo> todoList) {
         this.mContext = mContext;
         this.todoList = todoList;
     }
