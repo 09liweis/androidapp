@@ -1,18 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    card_view:cardElevation="7dp"
-    card_view:contentPadding="7dp"
-    card_view:cardCornerRadius="7dp"
-    card_view:cardMaxElevation="7dp"
+    android:padding="16dp"
     >
 
-    <TextView
-        android:id="@+id/todo_name"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"/>
-</android.support.v7.widget.CardView>
+        android:id="@+id/cv"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/todo_name"
+                android:layout_alignParentTop="true"
+                android:textSize="25sp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/todo_status"
+                android:layout_below="@+id/todo_name"
+                />
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

@@ -36,7 +36,7 @@ import java.util.logging.FileHandler;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView rv;
+    private RecyclerView todo_list;
     TodoListAdapter todoListAdapter;
 
     //todo list
@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         todoList = new ArrayList<Todo>();
-        rv = (RecyclerView) findViewById(R.id.rv);
-        rv.setLayoutManager(new LinearLayoutManager(this));
+        todo_list = (RecyclerView) findViewById(R.id.todo_list);
+        todo_list.setLayoutManager(new LinearLayoutManager(this));
 
 
         //call todo list api
@@ -95,6 +95,6 @@ public class MainActivity extends AppCompatActivity {
         }
         System.out.print(todoList);
         todoListAdapter = new TodoListAdapter(this, todoList);
-        rv.setAdapter(todoListAdapter);
+        todo_list.setAdapter(todoListAdapter);
     }
 }
