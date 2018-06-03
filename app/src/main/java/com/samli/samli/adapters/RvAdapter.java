@@ -8,17 +8,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.samli.samli.R;
+import com.samli.samli.models.Todo;
 
 import java.util.ArrayList;
 
 public class RvAdapter extends RecyclerView.Adapter<RvAdapter.DataViewHolder> {
 
     private Context mContext;
-    private ArrayList<String> mList;
+    private ArrayList<Todo> todoList;
 
-    public RvAdapter(Context mContext, ArrayList<String> mList) {
+    public RvAdapter(Context mContext, ArrayList<Todo> todoList) {
         this.mContext = mContext;
-        this.mList = mList;
+        this.todoList = todoList;
     }
 
     @Override
@@ -34,12 +35,11 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.DataViewHolder> {
 
     @Override
     public void onBindViewHolder(DataViewHolder holder, int position) {
-        holder.tv_data.setText(mList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return todoList.size();
     }
 
     public static class DataViewHolder extends RecyclerView.ViewHolder{

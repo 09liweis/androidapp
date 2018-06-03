@@ -32,6 +32,6 @@ public class Todo {
     }
 
     public void setStatus(String status) {
-        this.status = status
+        this.status = status;
     }
 }
