@@ -11,6 +11,14 @@ public class Todo {
         this.status = status;
     }
 
+    public String getId() {
+        return _id;
+    }
+
+    public void setId(String id) {
+        this._id = id;
+    }
+
     public String getName() {
         return name;
     }
