@@ -10,4 +10,8 @@ public class Todo {
         this.name = name;
         this.status = status;
     }
+
+    public String getName() {
+        return name;
+    }
 }
