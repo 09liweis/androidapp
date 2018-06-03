@@ -35,6 +35,8 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.DataViewHolder> {
 
     @Override
     public void onBindViewHolder(DataViewHolder holder, int position) {
+        Todo todo = todoList.get(position);
+        holder.todoName.setText(todo.getName());
     }
 
     @Override
@@ -43,10 +45,10 @@ public class RvAdapter extends RecyclerView.Adapter<RvAdapter.DataViewHolder> {
     }
 
     public static class DataViewHolder extends RecyclerView.ViewHolder{
-        TextView tv_data;
+        TextView todoName;
         public DataViewHolder(View itemView) {
             super(itemView);
-            tv_data = (TextView) itemView.findViewById(R.id.tv_recycle);
+            todoName = (TextView) itemView.findViewById(R.id.todo_name);
         }
     }
 }
