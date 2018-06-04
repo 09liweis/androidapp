@@ -24,7 +24,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataVi
 
     @Override
     public DataViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.item,null);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.todo,null);
         //使用代码设置宽高（xml布局设置无效时）
         view.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
