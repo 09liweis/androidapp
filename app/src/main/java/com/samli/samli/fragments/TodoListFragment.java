@@ -96,7 +96,8 @@ public class TodoListFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-//                        Toast.makeText(MainActivity.this, "Unable to fetch data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        getTodoList();
+                        Toast.makeText(getContext().getApplicationContext(), "Unable to fetch data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -118,7 +119,7 @@ public class TodoListFragment extends Fragment {
             }
             todoList.add(todo);
         }
-        System.out.print(todoList);
+
         todoListAdapter = new TodoListAdapter(getContext().getApplicationContext(), todoList);
         todo_list.setAdapter(todoListAdapter);
     }
