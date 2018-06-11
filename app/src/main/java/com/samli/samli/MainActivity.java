@@ -44,9 +44,10 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
 
+
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            public boolean onNavigationItemSelected(MenuItem item) {
                 int itemId = item.getItemId();
                 Toast.makeText(MainActivity.this, itemId, Toast.LENGTH_SHORT).show();
                 return false;
@@ -56,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         TodoListFragment todoListFragment = new TodoListFragment();
-        fragmentTransaction.add(R.id.frame_content, todoListFragment);
+        fragmentTransaction.replace(R.id.frame_content, todoListFragment);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
         todoList = new ArrayList<Todo>();
