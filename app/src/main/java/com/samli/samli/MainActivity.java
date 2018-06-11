@@ -26,6 +26,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.samli.samli.adapters.TodoListAdapter;
+import com.samli.samli.fragments.TodoListFragment;
 import com.samli.samli.models.FIleHelper;
 import com.samli.samli.models.Todo;
 
@@ -55,14 +56,16 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
 
-//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                int itemId = item.getItemId();
-//                Toast.makeText(MainActivity.this, itemId, Toast.LENGTH_SHORT).show();
-//                return false;
-//            }
-//        });
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+                Toast.makeText(MainActivity.this, itemId, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new TodoListFragment(), TodoListFragment.class.getName()).commit();
 
         todoList = new ArrayList<Todo>();
         todo_list = (RecyclerView) findViewById(R.id.todo_list);
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //call todo list api
-//        getTodoList();
+        getTodoList();
 
     }
 
