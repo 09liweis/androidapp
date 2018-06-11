@@ -2,6 +2,7 @@ package com.samli.samli;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -61,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
         //call todo list api
         getTodoList();
 
+    }
+
+    private boolean loadFragment(Fragment fragment) {
+        return false;
     }
 
     public void getTodoList() {
