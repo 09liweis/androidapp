@@ -49,16 +49,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 Toast.makeText(MainActivity.this, item.getItemId(), Toast.LENGTH_SHORT).show();
-                return false;
+                return true;
             }
         });
-
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        TodoListFragment todoListFragment = new TodoListFragment();
-//        fragmentTransaction.replace(R.id.frame_content, todoListFragment);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
 
         todoList = new ArrayList<Todo>();
         todo_list = (RecyclerView) findViewById(R.id.todo_list);
