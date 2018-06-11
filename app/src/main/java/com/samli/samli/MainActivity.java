@@ -62,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         //call todo list api
         getTodoList();
 
+        loadFragment(new TodoListFragment());
+
     }
 
     private boolean loadFragment(Fragment fragment) {
