@@ -5,11 +5,28 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
+import com.samli.samli.MainActivity;
 import com.samli.samli.R;
+import com.samli.samli.adapters.TodoListAdapter;
+import com.samli.samli.models.Todo;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,6 +36,13 @@ import com.samli.samli.R;
  * create an instance of this fragment.
  */
 public class TodoListFragment extends Fragment {
+    private RecyclerView todo_list;
+    TodoListAdapter todoListAdapter;
+
+    //todo list
+    ArrayList<Todo> todoList;
+    RequestQueue requestQueue;
+    String todoAPI = "http://samliweisen.herokuapp.com/api/todos";
 
     public TodoListFragment() {
         // Required empty public constructor
@@ -41,7 +65,61 @@ public class TodoListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_todo_list, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_todo_list, container, false);
+        todo_list = (RecyclerView) rootView.findViewById(R.id.todo_list);
+        todo_list.setLayoutManager(new LinearLayoutManager(getContext().getApplicationContext()));
+        return rootView;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        todoList = new ArrayList<Todo>();
+
+
+        //call todo list api
+        getTodoList();
+    }
+
+    public void getTodoList() {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(todoAPI,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray jsonArray) {
+                        handleTodoJSON(jsonArray);
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+//                        Toast.makeText(MainActivity.this, "Unable to fetch data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue = Volley.newRequestQueue(getContext().getApplicationContext());
+        requestQueue.add(jsonArrayRequest);
+    }
+
+    public void handleTodoJSON(JSONArray jsonArray) {
+        for(int i = 0; i < jsonArray.length(); i++) {
+            Todo todo = new Todo();
+            JSONObject json = null;
+            try {
+                json = jsonArray.getJSONObject(i);
+                todo.setId(json.getString("_id"));
+                todo.setName(json.getString("name"));
+                todo.setStatus(json.getString("status"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            todoList.add(todo);
+        }
+        System.out.print(todoList);
+        todoListAdapter = new TodoListAdapter(getContext().getApplicationContext(), todoList);
+        todo_list.setAdapter(todoListAdapter);
     }
 }
