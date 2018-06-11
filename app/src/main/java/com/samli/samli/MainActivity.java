@@ -41,25 +41,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView)
-                findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {
                 int itemId = item.getItemId();
-                Toast.makeText(MainActivity.this, itemId, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, item.getItemId(), Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        TodoListFragment todoListFragment = new TodoListFragment();
-        fragmentTransaction.replace(R.id.frame_content, todoListFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        TodoListFragment todoListFragment = new TodoListFragment();
+//        fragmentTransaction.replace(R.id.frame_content, todoListFragment);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
 
         todoList = new ArrayList<Todo>();
         todo_list = (RecyclerView) findViewById(R.id.todo_list);
