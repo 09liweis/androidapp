@@ -2,32 +2,22 @@ package com.samli.samli;
 
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.method.ScrollingMovementMethod;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.samli.samli.adapters.TodoListAdapter;
 import com.samli.samli.fragments.TodoListFragment;
-import com.samli.samli.models.FIleHelper;
 import com.samli.samli.models.Todo;
 
 import org.json.JSONArray;
@@ -35,8 +25,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.FileHandler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -65,7 +53,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.frame_content, new TodoListFragment(), TodoListFragment.class.getName()).commit();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        TodoListFragment todoListFragment = new TodoListFragment();
+        fragmentTransaction.add(R.id.frame_content, todoListFragment);
+        fragmentTransaction.commit();
 
         todoList = new ArrayList<Todo>();
         todo_list = (RecyclerView) findViewById(R.id.todo_list);
