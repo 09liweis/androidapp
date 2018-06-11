@@ -1,5 +1,6 @@
 package com.samli.samli;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -53,13 +55,22 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView)
                 findViewById(R.id.bottom_navigation);
 
+//        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                int itemId = item.getItemId();
+//                Toast.makeText(MainActivity.this, itemId, Toast.LENGTH_SHORT).show();
+//                return false;
+//            }
+//        });
+
         todoList = new ArrayList<Todo>();
         todo_list = (RecyclerView) findViewById(R.id.todo_list);
         todo_list.setLayoutManager(new LinearLayoutManager(this));
 
 
         //call todo list api
-        getTodoList();
+//        getTodoList();
 
     }
 
