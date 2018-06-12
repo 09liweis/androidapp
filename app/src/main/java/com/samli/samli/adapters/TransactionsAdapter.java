@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.samli.samli.R;
 import com.samli.samli.models.Transaction;
@@ -38,12 +39,18 @@ public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapte
 
     @Override
     public void onBindViewHolder(DataViewHolder viewHolder, int position) {
-
+        Transaction transaction = transactions.get(position);
+        viewHolder.title.setText(transaction.getTitle());
+        viewHolder.price.setText(transaction.getPrice());
     }
 
     public static class DataViewHolder extends RecyclerView.ViewHolder {
+        TextView title;
+        TextView price;
         public DataViewHolder(View itemView) {
             super(itemView);
+            title = itemView.findViewById(R.id.title);
+            price = itemView.findViewById(R.id.price);
         }
     }
 }

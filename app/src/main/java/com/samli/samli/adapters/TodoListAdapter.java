@@ -50,7 +50,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataVi
         TextView todoStatus;
         public DataViewHolder(View itemView) {
             super(itemView);
-            todoName = (TextView) itemView.findViewById(R.id.todo_name);
+            todoName = itemView.findViewById(R.id.todo_name);
             todoStatus = itemView.findViewById(R.id.todo_status);
         }
     }

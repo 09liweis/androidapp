@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.samli.samli.fragments.TodoListFragment;
+import com.samli.samli.fragments.TransactionsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,7 +25,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
-                Toast.makeText(MainActivity.this, item.getItemId(), Toast.LENGTH_SHORT).show();
+                switch (itemId) {
+                    case R.id.navigation_todos:
+                        loadFragment(new TodoListFragment());
+                        break;
+                    case R.id.navigation_transactions:
+                        loadFragment(new TransactionsFragment());
+                        break;
+                }
                 return true;
             }
         });
