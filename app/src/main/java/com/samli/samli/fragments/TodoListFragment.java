@@ -1,7 +1,5 @@
 package com.samli.samli.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,7 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.samli.samli.MainActivity;
+
 import com.samli.samli.R;
 import com.samli.samli.adapters.TodoListAdapter;
 import com.samli.samli.models.Todo;
@@ -69,7 +67,7 @@ public class TodoListFragment extends Fragment {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_todo_list, container, false);
-        todo_list = (RecyclerView) rootView.findViewById(R.id.todo_list);
+        todo_list = rootView.findViewById(R.id.todo_list);
         todo_list.setLayoutManager(new LinearLayoutManager(getContext().getApplicationContext()));
         return rootView;
     }
