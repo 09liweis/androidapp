@@ -7,12 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.samli.samli.R;
+import com.samli.samli.models.Transaction;
+
+import java.util.ArrayList;
 
 public class TransactionsAdapter extends RecyclerView.Adapter<TransactionsAdapter.DataViewHolder> {
     private Context context;
+    private ArrayList<Transaction> transactions;
 
-    public TransactionsAdapter(Context context) {
+    public TransactionsAdapter(Context context, ArrayList<Transaction> transactions) {
         this.context = context;
+        this.transactions = transactions;
     }
 
     @Override
