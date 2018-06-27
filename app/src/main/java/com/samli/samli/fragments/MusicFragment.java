@@ -51,11 +51,6 @@ public class MusicFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_music, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-
-    }
-
     @Override
     public void onDetach() {
         super.onDetach();
