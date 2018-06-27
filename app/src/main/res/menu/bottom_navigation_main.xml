@@ -12,7 +12,7 @@
         android:title="Transactions"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_music"
+        android:id="@+id/navigation_music"
         android:enabled="true"
         android:title="@string/text_music"
         app:showAsAction="ifRoom" />
