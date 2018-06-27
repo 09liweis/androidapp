@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.samli.samli.fragments.MusicFragment;
 import com.samli.samli.fragments.TodoListFragment;
 import com.samli.samli.fragments.TransactionsFragment;
 
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int itemId = item.getItemId();
                 switch (itemId) {
+                    case R.id.navigation_music:
+                        loadFragment(new MusicFragment());
+                        break;
                     case R.id.navigation_todos:
                         loadFragment(new TodoListFragment());
                         break;
