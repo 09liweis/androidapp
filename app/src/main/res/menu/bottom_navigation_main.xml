@@ -7,13 +7,13 @@
         android:title="Todos"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/navigation_visuals"
+        android:enabled="true"
+        android:title="Movies"
+        app:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/navigation_transactions"
         android:enabled="true"
         android:title="Transactions"
-        app:showAsAction="ifRoom" />
-    <item
-        android:id="@+id/navigation_music"
-        android:enabled="true"
-        android:title="@string/text_music"
         app:showAsAction="ifRoom" />
 </menu>
