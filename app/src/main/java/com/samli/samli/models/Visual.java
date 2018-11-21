@@ -6,6 +6,8 @@ public class Visual {
     String douban_id;
     String poster;
 
+    public  Visual() {}
+
     public Visual(int id, String title, String douban_id, String poster) {
         this.id = id;
         this.title = title;
