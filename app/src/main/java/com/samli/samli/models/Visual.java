@@ -3,15 +3,15 @@ package com.samli.samli.models;
 public class Visual {
     int id;
     String title;
-    String douban_id;
+    String doubanId;
     String poster;
 
     public  Visual() {}
 
-    public Visual(int id, String title, String douban_id, String poster) {
+    public Visual(int id, String title, String doubanId, String poster) {
         this.id = id;
         this.title = title;
-        this.douban_id = douban_id;
+        this.doubanId = doubanId;
         this.poster = poster;
     }
 
@@ -28,10 +28,10 @@ public class Visual {
         this.title = title;
     }
     public String getDoubanId() {
-        return douban_id;
+        return doubanId;
     }
-    public void setDoubanId(String douban_id) {
-        this.douban_id = douban_id;
+    public void setDoubanId(String doubanId) {
+        this.doubanId = doubanId;
     }
     public String getPoster() {
         return poster;
