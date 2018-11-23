@@ -16,20 +16,30 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             >
-            <TextView
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/visual_title"
-                android:layout_alignParentTop="true"
-                android:textSize="25sp"
-                />
+                android:id="@+id/visual_poster" />
+            <RelativeLayout
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@+id/visual_poster"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/visual_title"
+                    android:layout_alignParentTop="true"
+                    android:textSize="25sp"
+                    />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/douban_id"
-                android:layout_below="@+id/visual_title"
-                />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/douban_id"
+                    android:layout_below="@+id/visual_title"
+                    />
+            </RelativeLayout>
         </RelativeLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

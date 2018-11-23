@@ -77,12 +77,12 @@ public class VisualFragment extends Fragment {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
-                        try {
-                            JSONArray visuals = jsonObject.getJSONArray("results");
-                            handleTodoJSON(visuals);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    try {
+                        JSONArray visuals = jsonObject.getJSONArray("results");
+                        handleTodoJSON(visuals);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     }
 
                 },
@@ -106,6 +106,7 @@ public class VisualFragment extends Fragment {
                 json = jsonArray.getJSONObject(i);
                 visual.setTitle(json.getString("title"));
                 visual.setDouban_id(json.getString("douban_id"));
+                visual.setPoster(json.getString("poster"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
