@@ -40,7 +40,7 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
     public void onBindViewHolder(DataViewHolder holder, int position) {
         Visual visual = visualList.get(position);
         holder.visualTitle.setText(visual.getTitle());
-        holder.doubanId.setText(visual.getDouban_id());
+        holder.doubanId.setText(visual.getDoubanId());
         Picasso.get().load(visual.getPoster()).into(holder.poster);
     }
 

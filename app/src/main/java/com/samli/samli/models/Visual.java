@@ -27,10 +27,10 @@ public class Visual {
     public void setTitle(String title) {
         this.title = title;
     }
-    public String getDouban_id() {
+    public String getDoubanId() {
         return douban_id;
     }
-    public void setDouban_id(String douban_id) {
+    public void setDoubanId(String douban_id) {
         this.douban_id = douban_id;
     }
     public String getPoster() {

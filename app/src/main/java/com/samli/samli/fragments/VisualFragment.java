@@ -105,7 +105,7 @@ public class VisualFragment extends Fragment {
             try {
                 json = jsonArray.getJSONObject(i);
                 visual.setTitle(json.getString("title"));
-                visual.setDouban_id(json.getString("douban_id"));
+                visual.setDoubanId(json.getString("douban_id"));
                 visual.setPoster(json.getString("poster"));
             } catch (JSONException e) {
                 e.printStackTrace();
