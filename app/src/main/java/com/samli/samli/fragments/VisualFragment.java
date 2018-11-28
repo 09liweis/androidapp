@@ -114,7 +114,7 @@ public class VisualFragment extends Fragment {
             visualList.add(visual);
         }
 
-        visualListAdapter = new VisualListAdapter(getContext().getApplicationContext(), visualList);
+        visualListAdapter = new VisualListAdapter(getContext(), visualList);
         visual_list.setAdapter(visualListAdapter);
     }
 }

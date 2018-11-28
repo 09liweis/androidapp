@@ -1,17 +1,17 @@
 package com.samli.samli.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.samli.samli.R;
-import com.samli.samli.models.Todo;
+import com.samli.samli.activities.VisualDetailActivity;
 import com.samli.samli.models.Visual;
 import com.squareup.picasso.Picasso;
 
@@ -40,7 +40,9 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
             public void onClick(View view) {
                 Integer pos = holder.getAdapterPosition();
                 Visual visual = visualList.get(pos);
+                Intent intent = new Intent(mContext.getApplicationContext(), VisualDetailActivity.class);
                 Toast.makeText(mContext, "Test" + visual.getTitle(), Toast.LENGTH_SHORT).show();
+                mContext.startActivity(intent);
             }
         });
         return holder;
