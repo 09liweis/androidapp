@@ -5,15 +5,9 @@ public class Visual {
     String title;
     String doubanId;
     String poster;
+    Double doubanRating;
 
-    public  Visual() {}
-
-    public Visual(int id, String title, String doubanId, String poster) {
-        this.id = id;
-        this.title = title;
-        this.doubanId = doubanId;
-        this.poster = poster;
-    }
+    public Visual() {}
 
     public int getId() {
         return id;
@@ -38,5 +32,11 @@ public class Visual {
     }
     public void setPoster(String poster) {
         this.poster = poster;
+    }
+    public double getDoubanRating() {
+        return doubanRating;
+    }
+    public void setDoubanRating(double doubanRating) {
+        this.doubanRating = doubanRating;
     }
 }

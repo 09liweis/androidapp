@@ -107,6 +107,7 @@ public class VisualFragment extends Fragment {
                 visual.setTitle(json.getString("title"));
                 visual.setDoubanId(json.getString("douban_id"));
                 visual.setPoster(json.getString("poster"));
+                visual.setDoubanRating(json.getDouble("douban_rating"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
