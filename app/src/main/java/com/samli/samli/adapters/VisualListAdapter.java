@@ -42,6 +42,7 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
                 Visual visual = visualList.get(pos);
                 Intent intent = new Intent(mContext.getApplicationContext(), VisualDetailActivity.class);
 //                Toast.makeText(mContext, "Test" + visual.getTitle(), Toast.LENGTH_SHORT).show();
+                intent.putExtra("id", visual.getId());
                 intent.putExtra("title", visual.getTitle());
                 intent.putExtra("poster", visual.getPoster());
                 mContext.startActivity(intent);

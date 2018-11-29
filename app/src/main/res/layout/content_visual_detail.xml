@@ -19,5 +19,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/visual_detail_poster" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/visual_increase_episode"
+        android:text="Increase Episode"/>
 
 </LinearLayout>

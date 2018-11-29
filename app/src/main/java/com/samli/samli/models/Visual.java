@@ -1,7 +1,7 @@
 package com.samli.samli.models;
 
 public class Visual {
-    int id;
+    String id;
     String title;
     String doubanId;
     String poster;
@@ -9,10 +9,10 @@ public class Visual {
 
     public Visual() {}
 
-    public int getId() {
+    public String getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
     public String getTitle() {
