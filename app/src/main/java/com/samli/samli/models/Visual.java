@@ -6,6 +6,8 @@ public class Visual {
     String doubanId;
     String poster;
     Double doubanRating;
+    Integer episodes;
+    Integer currentEpisode;
 
     public Visual() {}
 
@@ -38,5 +40,17 @@ public class Visual {
     }
     public void setDoubanRating(double doubanRating) {
         this.doubanRating = doubanRating;
+    }
+    public Integer getEpisodes() {
+        return episodes;
+    }
+    public void setEpisodes(Integer episodes) {
+        this.episodes = episodes;
+    }
+    public Integer getCurrentEpisode() {
+        return currentEpisode;
+    }
+    public void setCurrentEpisode(Integer currentEpisode) {
+        this.currentEpisode = currentEpisode;
     }
 }
