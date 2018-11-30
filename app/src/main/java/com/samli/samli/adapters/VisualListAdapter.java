@@ -15,6 +15,8 @@ import com.samli.samli.activities.VisualDetailActivity;
 import com.samli.samli.models.Visual;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.DataViewHolder> {
@@ -55,9 +57,10 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
     public void onBindViewHolder(DataViewHolder holder, int position) {
         Visual visual = visualList.get(position);
         holder.visualTitle.setText(visual.getTitle());
-        holder.doubanId.setText(visual.getDoubanId());
+        holder.doubanId.setText("豆瓣ID：" + visual.getDoubanId());
+        holder.doubanRating.setText("豆瓣评分: " + Double.toString(visual.getDoubanRating()));
         Picasso.get().load(visual.getPoster()).into(holder.poster);
-        holder.doubanRating.setText(Double.toString(visual.getDoubanRating()));
+        holder.episodesStatus.setText(Integer.toString(visual.getCurrentEpisode()) + " / " + Integer.toString(visual.getEpisodes()));
     }
 
     @Override
@@ -70,12 +73,14 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
         TextView doubanId;
         ImageView poster;
         TextView doubanRating;
+        TextView episodesStatus;
         public DataViewHolder(View itemView) {
             super(itemView);
             visualTitle = itemView.findViewById(R.id.visual_title);
             doubanId = itemView.findViewById(R.id.douban_id);
             poster = itemView.findViewById(R.id.visual_poster);
             doubanRating = itemView.findViewById(R.id.douban_rating);
+            episodesStatus = itemView.findViewById(R.id.episodes_status);
         }
     }
 }
