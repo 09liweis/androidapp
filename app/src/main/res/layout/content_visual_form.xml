@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/douban_search_text"
-        android:text="无限战争"/>
+        android:text="网络谜踪"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,8 +24,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/display_text"/>
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/visual_list"
+        android:id="@+id/visual_search_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>

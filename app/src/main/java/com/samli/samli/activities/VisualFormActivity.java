@@ -1,9 +1,11 @@
 package com.samli.samli.activities;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -54,6 +56,10 @@ public class VisualFormActivity extends AppCompatActivity {
             }
         });
 
+        visualList = new ArrayList<Visual>();
+        visualListRV = findViewById(R.id.visual_search_list);
+        visualListRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+
         doubanSearchText = (TextView) findViewById(R.id.douban_search_text);
         displayText = (TextView) findViewById(R.id.display_text);
         doubanSearchButton = (Button) findViewById(R.id.douban_search_button);
@@ -62,7 +68,6 @@ public class VisualFormActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final String url = doubanSearchAPI + doubanSearchText.getText();
-                displayText.setText(url);
                 StringRequest stringRequest = new StringRequest(url,
                     new Response.Listener<String>() {
                         @Override
@@ -91,6 +96,24 @@ public class VisualFormActivity extends AppCompatActivity {
         JSONObject jsonObject = new JSONObject(response);
         JSONArray jsonArray = new JSONArray(jsonObject.getString("subjects"));
 
+        int length = jsonArray.length();
+
+        for(int i = 0; i < length; i++) {
+            Visual visual = new Visual();
+            JSONObject json = jsonArray.getJSONObject(i);;
+
+            visual.setTitle(json.getString("title"));
+            visual.setDoubanId(json.getString("id"));
+            JSONObject images = new JSONObject(json.getString("images"));
+            visual.setPoster(images.getString("large"));
+            JSONObject rating = new JSONObject(json.getString("rating"));
+            visual.setDoubanRating(rating.getDouble("average"));
+
+            visualList.add(visual);
+        }
+
+        visualListAdapter = new VisualListAdapter(getApplicationContext(), visualList);
+        visualListRV.setAdapter(visualListAdapter);
     }
 
 }
