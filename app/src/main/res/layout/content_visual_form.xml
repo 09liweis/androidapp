@@ -12,11 +12,17 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/douban_search_text" />
+        android:id="@+id/douban_search_text"
+        android:text="infinitywar"/>
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/douban_search_button"
         android:text="Search to Add"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/display_text"/>
 
 </LinearLayout>
