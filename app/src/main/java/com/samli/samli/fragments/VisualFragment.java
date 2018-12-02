@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 public class VisualFragment extends Fragment {
 
-    private RecyclerView visual_list;
+    private RecyclerView visualListRV;
     VisualListAdapter visualListAdapter;
 
     ArrayList<Visual> visualList;
@@ -71,8 +71,8 @@ public class VisualFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_visual_list, container, false);
-        visual_list = rootView.findViewById(R.id.visual_list);
-        visual_list.setLayoutManager(new LinearLayoutManager(getContext().getApplicationContext()));
+        visualListRV = rootView.findViewById(R.id.visual_list);
+        visualListRV.setLayoutManager(new LinearLayoutManager(getContext().getApplicationContext()));
 
         FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.add);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -103,7 +103,6 @@ public class VisualFragment extends Fragment {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                    getVisualList();
                     Toast.makeText(getContext().getApplicationContext(), "Unable to fetch data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -118,13 +117,17 @@ public class VisualFragment extends Fragment {
             JSONObject json = null;
             try {
                 json = jsonArray.getJSONObject(i);
-                visual.setId(json.getString("id"));
+//                visual.setId(json.getString("id"));
                 visual.setTitle(json.getString("title"));
                 visual.setDoubanId(json.getString("douban_id"));
                 visual.setPoster(json.getString("poster"));
                 visual.setDoubanRating(json.getDouble("douban_rating"));
-                visual.setEpisodes(json.getInt("episodes"));
-                visual.setCurrentEpisode(json.getInt("current_episode"));
+                if (json.has("episodes")) {
+                    visual.setEpisodes(json.getInt("episodes"));
+                }
+                if (json.has("current_episode")) {
+                    visual.setCurrentEpisode(json.getInt("current_episode"));
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -132,6 +135,6 @@ public class VisualFragment extends Fragment {
         }
 
         visualListAdapter = new VisualListAdapter(getContext(), visualList);
-        visual_list.setAdapter(visualListAdapter);
+        visualListRV.setAdapter(visualListAdapter);
     }
 }

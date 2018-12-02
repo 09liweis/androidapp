@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -17,11 +18,15 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.samli.samli.R;
+import com.samli.samli.adapters.VisualListAdapter;
 import com.samli.samli.models.Visual;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+
 
 public class VisualFormActivity extends AppCompatActivity {
     TextView doubanSearchText;
@@ -29,6 +34,9 @@ public class VisualFormActivity extends AppCompatActivity {
     TextView displayText;
     String doubanSearchAPI = "https://api.douban.com/v2/movie/search?q=";
     RequestQueue requestQueue;
+    private RecyclerView visualListRV;
+    VisualListAdapter visualListAdapter;
+    ArrayList<Visual> visualList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +88,8 @@ public class VisualFormActivity extends AppCompatActivity {
     }
 
     private void handleDoubanSearch(String response) throws JSONException {
+        JSONObject jsonObject = new JSONObject(response);
+        JSONArray jsonArray = new JSONArray(jsonObject.getString("subjects"));
 
     }
 
