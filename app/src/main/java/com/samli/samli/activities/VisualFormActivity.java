@@ -93,6 +93,7 @@ public class VisualFormActivity extends AppCompatActivity {
     }
 
     private void handleDoubanSearch(String response) throws JSONException {
+        visualList.clear();
         JSONObject jsonObject = new JSONObject(response);
         JSONArray jsonArray = new JSONArray(jsonObject.getString("subjects"));
 
