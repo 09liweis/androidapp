@@ -80,6 +80,7 @@ public class VisualFormActivity extends AppCompatActivity {
     }
 
     private void handleDoubanSearch(String response) throws JSONException {
+
     }
 
 }
