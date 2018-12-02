@@ -1,8 +1,11 @@
 package com.samli.samli.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +22,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.samli.samli.R;
+import com.samli.samli.activities.VisualFormActivity;
 import com.samli.samli.adapters.VisualListAdapter;
 import com.samli.samli.models.Visual;
 
@@ -69,6 +73,16 @@ public class VisualFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_visual_list, container, false);
         visual_list = rootView.findViewById(R.id.visual_list);
         visual_list.setLayoutManager(new LinearLayoutManager(getContext().getApplicationContext()));
+
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.add);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), VisualFormActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 

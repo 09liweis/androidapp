@@ -21,6 +21,10 @@
         <activity
             android:name=".activities.VisualDetailActivity"
             android:label="@string/title_activity_visual_detail"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activities.VisualFormActivity"
+            android:label="@string/title_activity_visual_form"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
