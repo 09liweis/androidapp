@@ -57,7 +57,9 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
         holder.doubanId.setText("豆瓣ID：" + visual.getDoubanId());
         holder.doubanRating.setText("豆瓣评分: " + Double.toString(visual.getDoubanRating()));
         Picasso.get().load(visual.getPoster()).into(holder.poster);
-//        holder.episodesStatus.setText(Integer.toString(visual.getCurrentEpisode()) + " / " + Integer.toString(visual.getEpisodes()));
+        if (visual.getCurrentEpisode() != null) {
+            holder.episodesStatus.setText(Integer.toString(visual.getCurrentEpisode()) + " / " + Integer.toString(visual.getEpisodes()));
+        }
     }
 
     @Override
