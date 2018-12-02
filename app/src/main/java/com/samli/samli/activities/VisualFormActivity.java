@@ -34,6 +34,13 @@ public class VisualFormActivity extends AppCompatActivity {
         doubanSearchText = (TextView) findViewById(R.id.douban_search_text);
         doubanSearchButton = (Button) findViewById(R.id.douban_search_button);
 
+        doubanSearchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
     }
 
 }
