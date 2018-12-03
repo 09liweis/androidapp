@@ -10,10 +10,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.samli.samli.R;
 import com.samli.samli.activities.VisualDetailActivity;
 import com.samli.samli.models.Visual;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -21,6 +30,7 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
 
     private Context mContext;
     private ArrayList<Visual> visualList;
+    RequestQueue requestQueue;
 
     public VisualListAdapter(Context mContext, ArrayList<Visual> visualList) {
         this.mContext = mContext;
@@ -41,7 +51,33 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
                 Integer pos = holder.getAdapterPosition();
                 Visual visual = visualList.get(pos);
                 if (visual.getId() == null) {
-                    Toast.makeText(mContext, visual.getTitle(), Toast.LENGTH_SHORT).show();
+                    String url = "https://api.douban.com/v2/movie/subject/" + visual.getDoubanId();
+                    Toast.makeText(mContext, url, Toast.LENGTH_SHORT).show();
+                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                            new Response.Listener<JSONObject>() {
+                                @Override
+                                public void onResponse(JSONObject result) {
+                                    try {
+                                        Visual visual = new Visual();
+                                        visual.setId(result.getString("id"));
+                                        visual.setTitle(result.getString("title"));
+                                        visual.setPoster(result.getString("poster"));
+                                        visual.setDoubanId(result.getString("douban_id"));
+                                        visual.setDoubanRating(result.getDouble("douban_rating"));
+
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                            },
+                            new Response.ErrorListener() {
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                }
+                            });
+                    requestQueue = Volley.newRequestQueue(mContext.getApplicationContext());
+                    requestQueue.add(jsonObjectRequest);
                 } else {
                     Intent intent = new Intent(mContext.getApplicationContext(), VisualDetailActivity.class);
                     intent.putExtra("id", visual.getId());
