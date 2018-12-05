@@ -52,18 +52,19 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
                 Visual visual = visualList.get(pos);
                 if (visual.getId() == null) {
                     String url = "https://api.douban.com/v2/movie/subject/" + visual.getDoubanId();
-                    Toast.makeText(mContext, url, Toast.LENGTH_SHORT).show();
                     JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                             new Response.Listener<JSONObject>() {
                                 @Override
                                 public void onResponse(JSONObject result) {
                                     try {
                                         Visual visual = new Visual();
-                                        visual.setId(result.getString("id"));
                                         visual.setTitle(result.getString("title"));
-                                        visual.setPoster(result.getString("poster"));
-                                        visual.setDoubanId(result.getString("douban_id"));
-                                        visual.setDoubanRating(result.getDouble("douban_rating"));
+                                        JSONObject images = result.getJSONObject("images");
+                                        visual.setPoster(images.getString("large"));
+                                        visual.setDoubanId(result.getString("id"));
+                                        JSONObject rating = result.getJSONObject("rating");
+                                        visual.setDoubanRating(rating.getDouble("average"));
+                                        Toast.makeText(mContext, visual.getTitle(), Toast.LENGTH_SHORT).show();
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
