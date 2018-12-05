@@ -67,27 +67,27 @@ public class VisualFormActivity extends AppCompatActivity {
         doubanSearchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String url = doubanSearchAPI + doubanSearchText.getText();
-                StringRequest stringRequest = new StringRequest(url,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            try {
-                                handleDoubanSearch(response);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+            final String url = doubanSearchAPI + doubanSearchText.getText();
+            StringRequest stringRequest = new StringRequest(url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            handleDoubanSearch(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
+                    }
 
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            displayText.setText(error.toString());
-                        }
-                    });
-                requestQueue = Volley.newRequestQueue(getApplicationContext());
-                requestQueue.add(stringRequest);
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        displayText.setText(error.toString());
+                    }
+                });
+            requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
             }
         });
     }
