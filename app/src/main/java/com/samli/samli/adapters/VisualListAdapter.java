@@ -8,22 +8,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.samli.samli.R;
 import com.samli.samli.activities.VisualDetailActivity;
 import com.samli.samli.activities.VisualFormActivity;
 import com.samli.samli.models.Visual;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -31,7 +22,6 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
 
     private Context mContext;
     private ArrayList<Visual> visualList;
-    RequestQueue requestQueue;
 
     public VisualListAdapter(Context mContext, ArrayList<Visual> visualList) {
         this.mContext = mContext;
@@ -51,12 +41,13 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
             public void onClick(View view) {
                 Integer pos = holder.getAdapterPosition();
                 Visual visual = visualList.get(pos);
+                Intent intent;
                 if (visual.getId() == null) {
-                    Intent intent = new Intent(mContext.getApplicationContext(), VisualFormActivity.class);
+                    intent = new Intent(mContext.getApplicationContext(), VisualFormActivity.class);
                     intent.putExtra("doubanId", visual.getDoubanId());
                     mContext.startActivity(intent);
                 } else {
-                    Intent intent = new Intent(mContext.getApplicationContext(), VisualDetailActivity.class);
+                    intent = new Intent(mContext.getApplicationContext(), VisualDetailActivity.class);
                     intent.putExtra("id", visual.getId());
                     intent.putExtra("title", visual.getTitle());
                     intent.putExtra("poster", visual.getPoster());
