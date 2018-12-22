@@ -30,7 +30,6 @@ import java.util.ArrayList;
 public class VisualSearchFormActivity extends AppCompatActivity {
     TextView doubanSearchText;
     Button doubanSearchButton;
-    TextView displayText;
     String doubanSearchAPI = "https://api.douban.com/v2/movie/search?q=";
     RequestQueue requestQueue;
     private RecyclerView visualListRV;
@@ -58,7 +57,6 @@ public class VisualSearchFormActivity extends AppCompatActivity {
         visualListRV.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
         doubanSearchText = (TextView) findViewById(R.id.douban_search_text);
-        displayText = (TextView) findViewById(R.id.display_text);
         doubanSearchButton = (Button) findViewById(R.id.douban_search_button);
 
         doubanSearchButton.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +78,7 @@ public class VisualSearchFormActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        displayText.setText(error.toString());
+
                     }
                 });
             requestQueue = Volley.newRequestQueue(getApplicationContext());
