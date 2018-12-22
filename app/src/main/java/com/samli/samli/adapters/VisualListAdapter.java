@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.samli.samli.R;
 import com.samli.samli.activities.VisualDetailActivity;
+import com.samli.samli.activities.VisualFormActivity;
 import com.samli.samli.models.Visual;
 import com.squareup.picasso.Picasso;
 
@@ -51,34 +52,9 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
                 Integer pos = holder.getAdapterPosition();
                 Visual visual = visualList.get(pos);
                 if (visual.getId() == null) {
-                    String url = "https://api.douban.com/v2/movie/subject/" + visual.getDoubanId();
-                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                            new Response.Listener<JSONObject>() {
-                                @Override
-                                public void onResponse(JSONObject result) {
-                                    try {
-                                        Visual visual = new Visual();
-                                        visual.setTitle(result.getString("title"));
-                                        JSONObject images = result.getJSONObject("images");
-                                        visual.setPoster(images.getString("large"));
-                                        visual.setDoubanId(result.getString("id"));
-                                        JSONObject rating = result.getJSONObject("rating");
-                                        visual.setDoubanRating(rating.getDouble("average"));
-                                        Toast.makeText(mContext, visual.getTitle(), Toast.LENGTH_SHORT).show();
-
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-
-                            },
-                            new Response.ErrorListener() {
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                }
-                            });
-                    requestQueue = Volley.newRequestQueue(mContext.getApplicationContext());
-                    requestQueue.add(jsonObjectRequest);
+                    Intent intent = new Intent(mContext.getApplicationContext(), VisualFormActivity.class);
+                    intent.putExtra("doubanId", visual.getDoubanId());
+                    mContext.startActivity(intent);
                 } else {
                     Intent intent = new Intent(mContext.getApplicationContext(), VisualDetailActivity.class);
                     intent.putExtra("id", visual.getId());
