@@ -108,7 +108,7 @@ public class VisualSearchFormActivity extends AppCompatActivity {
             visualList.add(visual);
         }
 
-        visualListAdapter = new VisualListAdapter(getApplicationContext(), visualList);
+        visualListAdapter = new VisualListAdapter(VisualSearchFormActivity.this, visualList);
         visualListRV.setAdapter(visualListAdapter);
     }
 

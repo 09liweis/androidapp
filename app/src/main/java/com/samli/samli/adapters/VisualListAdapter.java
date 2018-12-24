@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.samli.samli.R;
 import com.samli.samli.activities.VisualDetailActivity;
 import com.samli.samli.activities.VisualFormActivity;
+import com.samli.samli.activities.VisualSearchFormActivity;
 import com.samli.samli.models.Visual;
 import com.squareup.picasso.Picasso;
 
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 
 public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.DataViewHolder> {
 
-    private Context mContext;
+    private final Context mContext;
     private ArrayList<Visual> visualList;
 
     public VisualListAdapter(Context mContext, ArrayList<Visual> visualList) {
@@ -41,9 +42,9 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
             public void onClick(View view) {
                 Integer pos = holder.getAdapterPosition();
                 Visual visual = visualList.get(pos);
-                Intent intent;
+                final Intent intent;
                 if (visual.getId() == null) {
-                    intent = new Intent(mContext.getApplicationContext(), VisualFormActivity.class);
+                    intent = new Intent(mContext, VisualFormActivity.class);
                     intent.putExtra("doubanId", visual.getDoubanId());
                     mContext.startActivity(intent);
                 } else {
@@ -51,6 +52,7 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
                     intent.putExtra("id", visual.getId());
                     intent.putExtra("title", visual.getTitle());
                     intent.putExtra("poster", visual.getPoster());
+                    intent.putExtra("doubanId", visual.getDoubanId());
                     mContext.startActivity(intent);
                 }
             }

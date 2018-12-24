@@ -12,10 +12,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/visual_title"/>
+        android:id="@+id/visual_form_title"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/visual_original_title"/>
+        android:id="@+id/visual_form_original_title"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/visual_form_douban_id"/>
 
 </LinearLayout>
