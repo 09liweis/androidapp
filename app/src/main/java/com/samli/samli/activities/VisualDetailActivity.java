@@ -44,8 +44,10 @@ public class VisualDetailActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent;
+                intent = new Intent(VisualDetailActivity.this, VisualFormActivity.class);
+                intent.putExtra("doubanId", visual.getDoubanId());
+                startActivity(intent);
             }
         });
 
