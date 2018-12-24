@@ -23,31 +23,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class VisualFormActivity extends AppCompatActivity {
-    EditText title;
-    EditText originTitle;
+    EditText titleET;
+    EditText originTitleET;
+    EditText doubanIdET;
     RequestQueue requestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visual_form);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        titleET = findViewById(R.id.visual_form_title);
+        originTitleET = findViewById(R.id.visual_form_original_title);
+        doubanIdET = findViewById(R.id.visual_form_douban_id);
 
-        title = findViewById(R.id.visual_title);
-        originTitle = findViewById(R.id.visual_original_title);
 
         Intent intent = getIntent();
         String doubanId = intent.getStringExtra("doubanId");
+        doubanIdET.setText(doubanId);
+
         getVisualFromDouban(doubanId);
     }
 
@@ -65,7 +59,7 @@ public class VisualFormActivity extends AppCompatActivity {
                         visual.setDoubanId(result.getString("id"));
                         JSONObject rating = result.getJSONObject("rating");
                         visual.setDoubanRating(rating.getDouble("average"));
-                        title.setText(visual.getTitle());
+                        titleET.setText(visual.getTitle());
 
                     } catch (JSONException e) {
                         e.printStackTrace();
