@@ -70,6 +70,7 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
         if (visual.getCurrentEpisode() != null) {
             holder.episodesStatus.setText(Integer.toString(visual.getCurrentEpisode()) + " / " + Integer.toString(visual.getEpisodes()));
         }
+        holder.releaseDate.setText(visual.getReleaseDate());
     }
 
     @Override
@@ -83,6 +84,7 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
         ImageView poster;
         TextView doubanRating;
         TextView episodesStatus;
+        TextView releaseDate;
         public DataViewHolder(View itemView) {
             super(itemView);
             visualTitle = itemView.findViewById(R.id.visual_title);
@@ -90,6 +92,7 @@ public class VisualListAdapter extends RecyclerView.Adapter<VisualListAdapter.Da
             poster = itemView.findViewById(R.id.visual_poster);
             doubanRating = itemView.findViewById(R.id.douban_rating);
             episodesStatus = itemView.findViewById(R.id.episodes_status);
+            releaseDate = itemView.findViewById(R.id.release_date);
         }
     }
 }
