@@ -59,7 +59,9 @@ public class VisualFormActivity extends AppCompatActivity {
                         visual.setDoubanId(result.getString("id"));
                         JSONObject rating = result.getJSONObject("rating");
                         visual.setDoubanRating(rating.getDouble("average"));
+                        String originalTitle = result.getString("original_title");
                         titleET.setText(visual.getTitle());
+                        originTitleET.setText(originalTitle);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
