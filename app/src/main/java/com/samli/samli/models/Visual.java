@@ -8,6 +8,7 @@ public class Visual {
     Double doubanRating;
     Integer episodes;
     Integer currentEpisode;
+    String releaseDate;
 
     public Visual() {}
 
@@ -52,5 +53,12 @@ public class Visual {
     }
     public void setCurrentEpisode(Integer currentEpisode) {
         this.currentEpisode = currentEpisode;
+    }
+    public String getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
     }
 }
