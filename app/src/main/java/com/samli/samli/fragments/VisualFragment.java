@@ -84,24 +84,24 @@ public class VisualFragment extends Fragment {
 
     public void getVisualList() {
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, visualAPI, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject jsonObject) {
-                    try {
-                        JSONArray visuals = jsonObject.getJSONArray("results");
-                        handleTodoJSON(visuals);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    }
-
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getContext().getApplicationContext(), "Unable to fetch data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+            new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject jsonObject) {
+                try {
+                    JSONArray visuals = jsonObject.getJSONArray("results");
+                    handleTodoJSON(visuals);
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+                }
+
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext().getApplicationContext(), "Unable to fetch data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
         );
         requestQueue = Volley.newRequestQueue(getContext().getApplicationContext());
         requestQueue.add(jsonObjectRequest);
@@ -118,6 +118,7 @@ public class VisualFragment extends Fragment {
                 visual.setDoubanId(json.getString("douban_id"));
                 visual.setPoster(json.getString("poster"));
                 visual.setDoubanRating(json.getDouble("douban_rating"));
+                visual.setReleaseDate(json.getString("release_date"));
                 if (json.has("episodes")) {
                     visual.setEpisodes(json.getInt("episodes"));
                 }
