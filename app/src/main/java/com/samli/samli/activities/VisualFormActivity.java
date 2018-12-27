@@ -26,6 +26,7 @@ public class VisualFormActivity extends AppCompatActivity {
     EditText titleET;
     EditText originTitleET;
     EditText doubanIdET;
+    EditText summaryET;
     RequestQueue requestQueue;
 
     @Override
@@ -36,6 +37,7 @@ public class VisualFormActivity extends AppCompatActivity {
         titleET = findViewById(R.id.visual_form_title);
         originTitleET = findViewById(R.id.visual_form_original_title);
         doubanIdET = findViewById(R.id.visual_form_douban_id);
+        summaryET = findViewById(R.id.visual_form_summary);
 
 
         Intent intent = getIntent();
@@ -59,9 +61,12 @@ public class VisualFormActivity extends AppCompatActivity {
                         visual.setDoubanId(result.getString("id"));
                         JSONObject rating = result.getJSONObject("rating");
                         visual.setDoubanRating(rating.getDouble("average"));
+
                         String originalTitle = result.getString("original_title");
+                        String summary = result.getString("summary");
                         titleET.setText(visual.getTitle());
                         originTitleET.setText(originalTitle);
+                        summaryET.setText(summary);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
