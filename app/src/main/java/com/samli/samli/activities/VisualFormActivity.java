@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -18,15 +19,20 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.samli.samli.R;
 import com.samli.samli.models.Visual;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.concurrent.atomic.DoubleAccumulator;
 
 public class VisualFormActivity extends AppCompatActivity {
     EditText titleET;
     EditText originTitleET;
     EditText doubanIdET;
+    EditText doubanRatingET;
     EditText summaryET;
+    ImageView doubanPosterIV;
     RequestQueue requestQueue;
 
     @Override
@@ -38,6 +44,8 @@ public class VisualFormActivity extends AppCompatActivity {
         originTitleET = findViewById(R.id.visual_form_original_title);
         doubanIdET = findViewById(R.id.visual_form_douban_id);
         summaryET = findViewById(R.id.visual_form_summary);
+        doubanPosterIV = findViewById(R.id.visual_form_douban_poster);
+        doubanRatingET = findViewById(R.id.visual_form_douban_rating);
 
 
         Intent intent = getIntent();
@@ -64,9 +72,14 @@ public class VisualFormActivity extends AppCompatActivity {
 
                         String originalTitle = result.getString("original_title");
                         String summary = result.getString("summary");
+                        String doubanPoster = images.getString("large");
+                        Double doubanRating = rating.getDouble("average");
+
                         titleET.setText(visual.getTitle());
                         originTitleET.setText(originalTitle);
                         summaryET.setText(summary);
+                        Picasso.get().load(doubanPoster).into(doubanPosterIV);
+                        doubanRatingET.setText(doubanRating.toString());
 
                     } catch (JSONException e) {
                         e.printStackTrace();
