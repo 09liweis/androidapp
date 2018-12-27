@@ -49,6 +49,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/visual_form_imdb_id"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Summary"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
