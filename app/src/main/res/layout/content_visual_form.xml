@@ -82,7 +82,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/visual_form_current_episode"/>
+        android:id="@+id/visual_form_current_episode"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

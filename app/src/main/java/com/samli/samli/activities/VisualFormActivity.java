@@ -33,6 +33,7 @@ public class VisualFormActivity extends AppCompatActivity {
     EditText doubanRatingET;
     EditText summaryET;
     EditText episodesET;
+    EditText imdbIDET;
     ImageView doubanPosterIV;
     RequestQueue requestQueue;
 
@@ -48,12 +49,14 @@ public class VisualFormActivity extends AppCompatActivity {
         doubanPosterIV = findViewById(R.id.visual_form_douban_poster);
         doubanRatingET = findViewById(R.id.visual_form_douban_rating);
         episodesET = findViewById(R.id.visual_form_episodes);
+        imdbIDET = findViewById(R.id.visual_form_imdb_id);
 
         Intent intent = getIntent();
         String doubanId = intent.getStringExtra("doubanId");
         doubanIdET.setText(doubanId);
 
         getVisualFromDouban(doubanId);
+        getIMDBID(doubanId);
     }
 
     public void getVisualFromDouban(String doubanId) {
@@ -99,6 +102,32 @@ public class VisualFormActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                 }
             });
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void getIMDBID(String doubanId) {
+        String url = "https://what-i-watched.herokuapp.com/api/get_imdb_id?douban_id=" + doubanId;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject result) {
+                        try {
+                            String imdbId = result.getString("imdb_id");
+                            imdbIDET.setText(imdbId);
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                });
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(jsonObjectRequest);
     }
