@@ -24,8 +24,6 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.concurrent.atomic.DoubleAccumulator;
-
 public class VisualFormActivity extends AppCompatActivity {
     EditText titleET;
     EditText originTitleET;
@@ -36,6 +34,7 @@ public class VisualFormActivity extends AppCompatActivity {
     EditText imdbIDET;
     EditText imdbRatingET;
     ImageView doubanPosterIV;
+    ImageView imdbPosterIV;
     RequestQueue requestQueue;
 
     @Override
@@ -52,6 +51,7 @@ public class VisualFormActivity extends AppCompatActivity {
         episodesET = findViewById(R.id.visual_form_episodes);
         imdbIDET = findViewById(R.id.visual_form_imdb_id);
         imdbRatingET = findViewById(R.id.visual_form_imdb_rating);
+        imdbPosterIV = findViewById(R.id.visual_form_imdb_poster);
 
         Intent intent = getIntent();
         String doubanId = intent.getStringExtra("doubanId");
@@ -144,7 +144,7 @@ public class VisualFormActivity extends AppCompatActivity {
                             String rating = result.getString("imdbRating");
                             String poster = result.getString("Poster");
                             imdbRatingET.setText(rating);
-
+                            Picasso.get().load(poster).into(imdbPosterIV);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
