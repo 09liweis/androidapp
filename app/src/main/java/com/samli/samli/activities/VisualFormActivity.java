@@ -34,6 +34,7 @@ public class VisualFormActivity extends AppCompatActivity {
     EditText summaryET;
     EditText episodesET;
     EditText imdbIDET;
+    EditText imdbRatingET;
     ImageView doubanPosterIV;
     RequestQueue requestQueue;
 
@@ -50,6 +51,7 @@ public class VisualFormActivity extends AppCompatActivity {
         doubanRatingET = findViewById(R.id.visual_form_douban_rating);
         episodesET = findViewById(R.id.visual_form_episodes);
         imdbIDET = findViewById(R.id.visual_form_imdb_id);
+        imdbRatingET = findViewById(R.id.visual_form_imdb_rating);
 
         Intent intent = getIntent();
         String doubanId = intent.getStringExtra("doubanId");
@@ -115,6 +117,33 @@ public class VisualFormActivity extends AppCompatActivity {
                         try {
                             String imdbId = result.getString("imdb_id");
                             imdbIDET.setText(imdbId);
+                            getDataFromIMDB(imdbId);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                });
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(jsonObjectRequest);
+    }
+
+    public void getDataFromIMDB(String imdbId) {
+        String url = "https://www.omdbapi.com/?apikey=6ad10fa5&i=" + imdbId;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject result) {
+                        try {
+                            String rating = result.getString("imdbRating");
+                            String poster = result.getString("Poster");
+                            imdbRatingET.setText(rating);
 
 
                         } catch (JSONException e) {
