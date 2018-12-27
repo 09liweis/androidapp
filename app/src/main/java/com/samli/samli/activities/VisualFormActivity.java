@@ -32,6 +32,7 @@ public class VisualFormActivity extends AppCompatActivity {
     EditText doubanIdET;
     EditText doubanRatingET;
     EditText summaryET;
+    EditText episodesET;
     ImageView doubanPosterIV;
     RequestQueue requestQueue;
 
@@ -46,7 +47,7 @@ public class VisualFormActivity extends AppCompatActivity {
         summaryET = findViewById(R.id.visual_form_summary);
         doubanPosterIV = findViewById(R.id.visual_form_douban_poster);
         doubanRatingET = findViewById(R.id.visual_form_douban_rating);
-
+        episodesET = findViewById(R.id.visual_form_episodes);
 
         Intent intent = getIntent();
         String doubanId = intent.getStringExtra("doubanId");
@@ -74,12 +75,18 @@ public class VisualFormActivity extends AppCompatActivity {
                         String summary = result.getString("summary");
                         String doubanPoster = images.getString("large");
                         Double doubanRating = rating.getDouble("average");
+                        String episodes = result.getString("episodes_count");
 
                         titleET.setText(visual.getTitle());
                         originTitleET.setText(originalTitle);
                         summaryET.setText(summary);
                         Picasso.get().load(doubanPoster).into(doubanPosterIV);
                         doubanRatingET.setText(doubanRating.toString());
+                        if (episodes.equals(null)) {
+                            episodesET.setText("1");
+                        } else {
+                            episodesET.setText(episodes);
+                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
