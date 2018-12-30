@@ -42,6 +42,13 @@ public class VisualFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visual_form);
 
+        FloatingActionButton fab = findViewById(R.id.post_visual);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
         titleET = findViewById(R.id.visual_form_title);
         originTitleET = findViewById(R.id.visual_form_original_title);
         doubanIdET = findViewById(R.id.visual_form_douban_id);
