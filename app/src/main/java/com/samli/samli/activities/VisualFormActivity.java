@@ -11,11 +11,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.samli.samli.R;
 import com.samli.samli.models.Visual;
@@ -23,6 +25,8 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class VisualFormActivity extends AppCompatActivity {
     EditText titleET;
@@ -66,6 +70,42 @@ public class VisualFormActivity extends AppCompatActivity {
 
         getVisualFromDouban(doubanId);
         getIMDBID(doubanId);
+    }
+
+    public void submitVisual() {
+        String url = "https://what-i-watched-a09liweis-1.c9users.io/api/visual/submit";
+        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        }) {
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                HashMap<String, String> params2 = new HashMap<String, String>();
+                params2.put("id", "0");
+                params2.put("title", titleET.getText().toString());
+                params2.put("original_title", originTitleET.getText().toString());
+                params2.put("douban_id", doubanIdET.getText().toString());
+                params2.put("douban_rating", doubanRatingET.getText().toString());
+                params2.put("poster", "");
+                params2.put("imdb_id", imdbIDET.getText().toString());
+                params2.put("imdb_rating", imdbRatingET.getText().toString());
+                params2.put("summary", summaryET.getText().toString());
+                params2.put("visual_type", "movie");
+                return new JSONObject(params2).toString().getBytes();
+            }
+
+            @Override
+            public String getBodyContentType() {
+                return "application/json";
+            }
+        };
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(sr);
     }
 
     public void getVisualFromDouban(String doubanId) {
