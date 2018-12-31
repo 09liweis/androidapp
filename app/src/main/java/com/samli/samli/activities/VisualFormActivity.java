@@ -50,6 +50,24 @@ public class VisualFormActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                JSONObject params2 = new JSONObject();
+                try {
+                    params2.put("id", "0");
+                    params2.put("title", titleET.getText().toString());
+                    params2.put("original_title", originTitleET.getText().toString());
+                    params2.put("douban_id", doubanIdET.getText().toString());
+                    params2.put("douban_rating", doubanRatingET.getText().toString());
+                    params2.put("poster", "");
+                    params2.put("imdb_id", imdbIDET.getText().toString());
+                    params2.put("imdb_rating", imdbRatingET.getText().toString());
+                    params2.put("summary", summaryET.getText().toString());
+                    params2.put("visual_type", "movie");
+                } catch (JSONException e) {
+
+                }
+                submitVisual(params2);
+                Snackbar.make(view, params2.toString(), Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show();
             }
         });
 
@@ -72,38 +90,22 @@ public class VisualFormActivity extends AppCompatActivity {
         getIMDBID(doubanId);
     }
 
-    public void submitVisual() {
+    public void submitVisual(JSONObject params2) {
         String url = "https://what-i-watched-a09liweis-1.c9users.io/api/visual/submit";
-        StringRequest sr = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-            }
-        }) {
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                HashMap<String, String> params2 = new HashMap<String, String>();
-                params2.put("id", "0");
-                params2.put("title", titleET.getText().toString());
-                params2.put("original_title", originTitleET.getText().toString());
-                params2.put("douban_id", doubanIdET.getText().toString());
-                params2.put("douban_rating", doubanRatingET.getText().toString());
-                params2.put("poster", "");
-                params2.put("imdb_id", imdbIDET.getText().toString());
-                params2.put("imdb_rating", imdbRatingET.getText().toString());
-                params2.put("summary", summaryET.getText().toString());
-                params2.put("visual_type", "movie");
-                return new JSONObject(params2).toString().getBytes();
-            }
 
-            @Override
-            public String getBodyContentType() {
-                return "application/json";
-            }
-        };
+
+        JsonObjectRequest sr = new JsonObjectRequest(Request.Method.POST, url, params2,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                    }
+                });
         requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(sr);
     }
