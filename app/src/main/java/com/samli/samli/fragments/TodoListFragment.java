@@ -84,20 +84,20 @@ public class TodoListFragment extends Fragment {
 
     public void getTodoList() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(todoAPI,
-                new Response.Listener<JSONArray>() {
-                    @Override
-                    public void onResponse(JSONArray jsonArray) {
-                        handleTodoJSON(jsonArray);
-                    }
-
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        getTodoList();
-                        Toast.makeText(getContext().getApplicationContext(), "Unable to fetch data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+            new Response.Listener<JSONArray>() {
+                @Override
+                public void onResponse(JSONArray jsonArray) {
+                    handleTodoJSON(jsonArray);
                 }
+
+            },
+            new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    getTodoList();
+                    Toast.makeText(getContext().getApplicationContext(), "Unable to fetch data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
         );
         requestQueue = Volley.newRequestQueue(getContext().getApplicationContext());
         requestQueue.add(jsonArrayRequest);
