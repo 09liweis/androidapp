@@ -1,7 +1,9 @@
 package com.samli.samli.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +19,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 
 import com.samli.samli.R;
+import com.samli.samli.activities.TodoFormActivity;
 import com.samli.samli.adapters.TodoListAdapter;
 import com.samli.samli.models.Todo;
 
@@ -69,6 +72,16 @@ public class TodoListFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_todo_list, container, false);
         todo_list = rootView.findViewById(R.id.todo_list);
         todo_list.setLayoutManager(new LinearLayoutManager(getContext().getApplicationContext()));
+
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.todo_add);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), TodoFormActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 

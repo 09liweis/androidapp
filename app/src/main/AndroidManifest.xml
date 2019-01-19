@@ -29,7 +29,8 @@
         <activity
             android:name=".activities.VisualFormActivity"
             android:label="@string/title_activity_visual_form"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".activities.TodoFormActivity"></activity>
     </application>
 
 </manifest>
