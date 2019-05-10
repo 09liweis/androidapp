@@ -31,14 +31,14 @@ public class MainActivity extends AppCompatActivity {
 //                    case R.id.navigation_music:
 //                        loadFragment(new MusicFragment());
 //                        break;
-                    case R.id.navigation_todos:
-                        loadFragment(new TodoListFragment());
-                        break;
-                    case R.id.navigation_visuals:
-                        loadFragment(new VisualFragment());
-                        break;
+//                    case R.id.navigation_visuals:
+//                        loadFragment(new VisualFragment());
+//                        break;
                     case R.id.navigation_transactions:
                         loadFragment(new TransactionsFragment());
+                        break;
+                    case R.id.navigation_todos:
+                        loadFragment(new TodoListFragment());
                         break;
                 }
                 return true;
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        loadFragment(new TodoListFragment());
+        loadFragment(new TransactionsFragment());
 
     }
 
