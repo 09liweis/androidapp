@@ -4,6 +4,7 @@ public class Todo {
     String name;
     String _id;
     String status;
+    Transaction transaction;
 
     public Todo() {
 
