@@ -125,6 +125,7 @@ public class TodoListFragment extends Fragment {
                 todo.setId(json.getString("_id"));
                 todo.setName(json.getString("name"));
                 todo.setStatus(json.getString("status"));
+                todo.setDate(json.getString("date"));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
