@@ -36,7 +36,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataVi
     @Override
     public void onBindViewHolder(DataViewHolder holder, int position) {
         Todo todo = todoList.get(position);
-        holder.todoName.setText(todo.getName());
+        holder.todoName.setText(todo.getName() + " - " + todo.getDate());
         holder.todoStatus.setText(todo.getStatus());
     }
 
