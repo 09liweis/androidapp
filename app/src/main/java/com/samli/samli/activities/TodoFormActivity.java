@@ -21,6 +21,7 @@ import org.json.JSONObject;
 public class TodoFormActivity extends AppCompatActivity {
 
     EditText todoNameET;
+    EditText todoDateET;
     Button todoAddBt;
     RequestQueue requestQueue;
 
@@ -30,6 +31,7 @@ public class TodoFormActivity extends AppCompatActivity {
         setContentView(R.layout.activity_todo_form);
 
         todoNameET = findViewById(R.id.todo_form_name);
+        todoDateET = findViewById(R.id.todo_form_date);
         todoAddBt = findViewById(R.id.todo_form_add);
 
         todoAddBt.setOnClickListener(new View.OnClickListener() {
@@ -44,6 +46,7 @@ public class TodoFormActivity extends AppCompatActivity {
         JSONObject params = new JSONObject();
         try {
             params.put("name", todoNameET.getText());
+            params.put("date", todoDateET.getText());
             params.put("status", "pending");
         } catch (JSONException e) {
 
