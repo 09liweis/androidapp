@@ -1,6 +1,7 @@
 package com.samli.samli.activities;
 
-import android.support.design.widget.Snackbar;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -10,64 +11,102 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.samli.samli.R;
+import com.samli.samli.fragments.TodoListFragment;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TodoFormActivity extends AppCompatActivity {
 
-    EditText todoNameET;
-    EditText todoDateET;
-    Button todoAddBt;
-    RequestQueue requestQueue;
+  EditText todoNameET;
+  EditText todoDateET;
+  Button todoAddBt;
+  RequestQueue requestQueue;
+  String url = "https://samliweisen.herokuapp.com/api/todos/";
+  String id;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_todo_form);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_todo_form);
 
-        todoNameET = findViewById(R.id.todo_form_name);
-        todoDateET = findViewById(R.id.todo_form_date);
-        todoAddBt = findViewById(R.id.todo_form_add);
+    todoNameET = findViewById(R.id.todo_form_name);
+    todoDateET = findViewById(R.id.todo_form_date);
+    todoAddBt = findViewById(R.id.todo_form_add);
 
-        todoAddBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                submitTodo(view);
-            }
-        });
+    Intent intent = getIntent();
+    id = intent.getStringExtra("id");
+    if (id.length() > 0) {
+      getTodo(id);
     }
 
-    protected void submitTodo(final View view) {
-        JSONObject params = new JSONObject();
+    todoAddBt.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        submitTodo(view);
+      }
+    });
+  }
+
+  protected void getTodo(String id) {
+    JsonObjectRequest sr = new JsonObjectRequest(Request.Method.GET, url + id,null, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject res) {
         try {
-            params.put("name", todoNameET.getText());
-            params.put("date", todoDateET.getText());
-            params.put("status", "pending");
+          JSONObject todo = res;
+          todoNameET.setText(todo.getString("name"));
+          todoDateET.setText(todo.getString("date"));
         } catch (JSONException e) {
 
         }
+      }
 
-        String url = "https://samliweisen.herokuapp.com/api/todos";
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
 
-        JsonObjectRequest sr = new JsonObjectRequest(Request.Method.POST, url, params,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Snackbar.make(view, "Success", Snackbar.LENGTH_SHORT)
-                                .setAction("Action", null).show();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
-                });
-        requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(sr);
+      }
+    });
+    requestQueue = Volley.newRequestQueue(getApplicationContext());
+    requestQueue.add(sr);
+  }
+
+
+  protected void submitTodo(final View view) {
+    int method = Request.Method.POST;
+    JSONObject params = new JSONObject();
+    try {
+      params.put("name", todoNameET.getText());
+      params.put("date", todoDateET.getText());
+      params.put("status", "pending");
+      if (id.length() > 0) {
+        params.put("_id",id);
+        method = Request.Method.PUT;
+        url = url + id;
+      }
+    } catch (JSONException e) {
+
     }
+
+    JsonObjectRequest sr = new JsonObjectRequest(method, url, params,new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject response) {
+        Toast.makeText(TodoFormActivity.this, "Success", Toast.LENGTH_SHORT).show();
+        finish();
+      }
+    },
+    new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+      }
+    });
+    requestQueue = Volley.newRequestQueue(getApplicationContext());
+    requestQueue.add(sr);
+  }
 }
