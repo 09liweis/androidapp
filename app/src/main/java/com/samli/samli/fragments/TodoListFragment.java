@@ -78,6 +78,7 @@ public class TodoListFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), TodoFormActivity.class);
+                intent.putExtra("id", "");
                 startActivity(intent);
             }
         });
