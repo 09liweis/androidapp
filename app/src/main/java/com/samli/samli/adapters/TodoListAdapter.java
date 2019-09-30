@@ -1,6 +1,7 @@
 package com.samli.samli.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.samli.samli.R;
+import com.samli.samli.activities.TodoFormActivity;
 import com.samli.samli.models.Todo;
 
 import java.util.ArrayList;
@@ -29,7 +31,17 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataVi
         view.setLayoutParams(new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
-        DataViewHolder holder = new DataViewHolder(view);
+        final DataViewHolder holder = new DataViewHolder(view);
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Integer pos = holder.getAdapterPosition();
+                Todo todo = todoList.get(pos);
+                Intent intent = new Intent(mContext.getApplicationContext(), TodoFormActivity.class);
+                intent.putExtra("id", todo.getId());
+                mContext.startActivity(intent);
+            }
+        });
         return holder;
     }
 
