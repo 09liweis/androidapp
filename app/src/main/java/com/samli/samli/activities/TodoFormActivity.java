@@ -3,6 +3,7 @@ package com.samli.samli.activities;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -24,7 +25,7 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class TodoFormActivity extends AppCompatActivity {
+public class TodoFormActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
   EditText todoNameET;
   Button todoDateBT;
@@ -50,7 +51,7 @@ public class TodoFormActivity extends AppCompatActivity {
     todoDateBT.setOnClickListener(new View.OnClickListener(){
       @Override
       public void onClick(View view) {
-//        DatePickerDialog.datePickerDialog = new DatePickerDialog(this,this,Calen)
+        showDatePickerDialog();
       }
     });
     todoAddBt.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +60,24 @@ public class TodoFormActivity extends AppCompatActivity {
         submitTodo(view);
       }
     });
+  }
+  private void showDatePickerDialog() {
+    DatePickerDialog datePickerDialog = new DatePickerDialog(
+            this,
+            this,
+            Calendar.getInstance().get(Calendar.YEAR),
+            Calendar.getInstance().get(Calendar.MONTH),
+            Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+    );
+    datePickerDialog.show();
+  }
+
+  @Override
+  public void onDateSet(DatePicker datePicker, int year, int m, int d) {
+    String month = ((m + 1) > 9) ? Integer.toString(m + 1) : "0" + (m + 1);
+    String day = ((d > 9) ? Integer.toString(d) : "0"+d);
+    String date = year + "-" + month + "-" + day;
+    todoDateBT.setText(date);
   }
 
   protected void getTodo(String id) {
