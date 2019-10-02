@@ -1,5 +1,6 @@
 package com.samli.samli.activities;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import com.samli.samli.fragments.TodoListFragment;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -25,7 +27,7 @@ import org.json.JSONObject;
 public class TodoFormActivity extends AppCompatActivity {
 
   EditText todoNameET;
-  EditText todoDateET;
+  Button todoDateBT;
   Button todoAddBt;
   RequestQueue requestQueue;
   String url = "https://samliweisen.herokuapp.com/api/todos/";
@@ -37,7 +39,7 @@ public class TodoFormActivity extends AppCompatActivity {
     setContentView(R.layout.activity_todo_form);
 
     todoNameET = findViewById(R.id.todo_form_name);
-    todoDateET = findViewById(R.id.todo_form_date);
+    todoDateBT = findViewById(R.id.todo_form_date);
     todoAddBt = findViewById(R.id.todo_form_add);
 
     Intent intent = getIntent();
@@ -45,7 +47,12 @@ public class TodoFormActivity extends AppCompatActivity {
     if (id.length() > 0) {
       getTodo(id);
     }
-
+    todoDateBT.setOnClickListener(new View.OnClickListener(){
+      @Override
+      public void onClick(View view) {
+//        DatePickerDialog.datePickerDialog = new DatePickerDialog(this,this,Calen)
+      }
+    });
     todoAddBt.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -61,7 +68,7 @@ public class TodoFormActivity extends AppCompatActivity {
         try {
           JSONObject todo = res;
           todoNameET.setText(todo.getString("name"));
-          todoDateET.setText(todo.getString("date"));
+          todoDateBT.setText(todo.getString("date"));
         } catch (JSONException e) {
 
         }
@@ -83,7 +90,7 @@ public class TodoFormActivity extends AppCompatActivity {
     JSONObject params = new JSONObject();
     try {
       params.put("name", todoNameET.getText());
-      params.put("date", todoDateET.getText());
+      params.put("date", todoDateBT.getText());
       params.put("status", "pending");
       if (id.length() > 0) {
         params.put("_id",id);
