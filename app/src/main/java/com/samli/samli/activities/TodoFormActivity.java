@@ -16,6 +16,7 @@ import com.samli.samli.R;
 import com.samli.samli.fragments.TodoListFragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -24,6 +25,9 @@ import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class TodoFormActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -62,12 +66,25 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
     });
   }
   private void showDatePickerDialog() {
+    String date = todoDateBT.getText().toString();
+    Integer year,month,day;
+    if (date.compareTo("Select Date") != 0) {
+      List<String> dateAry = Arrays.asList(date.split("-"));
+      Log.d("Date",dateAry.get(0));
+      year = Integer.parseInt(dateAry.get(0));
+      month = Integer.parseInt((dateAry.get(1))) - 1;
+      day = Integer.parseInt((dateAry.get(2)));
+    } else {
+      year = Calendar.getInstance().get(Calendar.YEAR);
+      month = Calendar.getInstance().get(Calendar.MONTH);
+      day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    }
     DatePickerDialog datePickerDialog = new DatePickerDialog(
             this,
             this,
-            Calendar.getInstance().get(Calendar.YEAR),
-            Calendar.getInstance().get(Calendar.MONTH),
-            Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
+            year,
+            month,
+            day
     );
     datePickerDialog.show();
   }
