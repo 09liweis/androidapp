@@ -13,7 +13,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.samli.samli.R;
-import com.samli.samli.fragments.TodoListFragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -21,6 +20,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -34,6 +35,10 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
   EditText todoNameET;
   Button todoDateBT;
   Button todoAddBt;
+  RadioGroup rdStatus;
+  RadioButton rdPending;
+  RadioButton rdWorking;
+  RadioButton rdDone;
   RequestQueue requestQueue;
   String url = "https://samliweisen.herokuapp.com/api/todos/";
   String id;
@@ -46,6 +51,18 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
     todoNameET = findViewById(R.id.todo_form_name);
     todoDateBT = findViewById(R.id.todo_form_date);
     todoAddBt = findViewById(R.id.todo_form_add);
+
+    rdStatus = findViewById(R.id.todo_form_status);
+    rdPending = findViewById(R.id.pending);
+    rdWorking = findViewById(R.id.working);
+    rdDone = findViewById(R.id.done);
+
+    rdStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+      }
+    });
 
     Intent intent = getIntent();
     id = intent.getStringExtra("id");
@@ -105,6 +122,16 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
           JSONObject todo = res;
           todoNameET.setText(todo.getString("name"));
           todoDateBT.setText(todo.getString("date"));
+          String status = todo.getString("status");
+          if (status == rdPending.getText().toString()) {
+            rdStatus.check(rdPending.getId());
+          }
+          if (status == rdWorking.getText().toString()) {
+            rdStatus.check(rdWorking.getId());
+          }
+          if (status == rdDone.getText().toString()) {
+            rdStatus.check(rdDone.getId());
+          }
         } catch (JSONException e) {
 
         }
@@ -127,7 +154,8 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
     try {
       params.put("name", todoNameET.getText());
       params.put("date", todoDateBT.getText());
-      params.put("status", "pending");
+      RadioButton rb = findViewById(rdStatus.getCheckedRadioButtonId());
+      params.put("status", rb.getText());
       if (id.length() > 0) {
         params.put("_id",id);
         method = Request.Method.PUT;

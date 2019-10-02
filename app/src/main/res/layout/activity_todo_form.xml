@@ -1,28 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activities.TodoFormActivity">
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context=".activities.TodoFormActivity">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Todo"/>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/todo_form_name"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/todo_form_date"
-        android:text="Select Date"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Add Todo"
-        android:id="@+id/todo_form_add"/>
+  <TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Todo"/>
+  <EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/todo_form_name"/>
+  <Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/todo_form_date"
+    android:text="Select Date"/>
+  <RadioGroup
+    android:id="@+id/todo_form_status"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/todo_form_date"
+    android:orientation="horizontal">
+    <RadioButton
+      android:id="@+id/pending"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:checked="true"
+      android:text="pending" />
+
+    <RadioButton
+      android:id="@+id/working"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="working" />
+    <RadioButton
+      android:id="@+id/done"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="done" />
+  </RadioGroup>
+  <Button
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Add Todo"
+    android:id="@+id/todo_form_add"/>
 </LinearLayout>
