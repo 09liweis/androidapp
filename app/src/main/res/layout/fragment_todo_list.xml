@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".fragments.TodoListFragment">
 
+    <com.wang.avi.AVLoadingIndicatorView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      app:indicatorName="BallPulseIndicator"
+      app:indicatorColor="#000000"
+      android:id="@+id/avi"
+      android:layout_gravity="center_vertical"
+
+      />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/todo_list"
         android:layout_width="match_parent"

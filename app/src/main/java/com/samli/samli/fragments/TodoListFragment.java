@@ -104,6 +104,7 @@ public class TodoListFragment extends Fragment {
             new Response.Listener<JSONArray>() {
               @Override
               public void onResponse(JSONArray jsonArray) {
+                avi.hide();
                 handleTodoJSON(jsonArray);
               }
 

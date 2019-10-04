@@ -13,6 +13,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.samli.samli.R;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +43,7 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
   RequestQueue requestQueue;
   String url = "https://samliweisen.herokuapp.com/api/todos/";
   String id;
+  AVLoadingIndicatorView avi;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,8 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
     rdWorking = findViewById(R.id.working);
     rdDone = findViewById(R.id.done);
 
+    avi = findViewById(R.id.todo_form_avi);
+
     rdStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
       @Override
       public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -67,6 +71,7 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
     Intent intent = getIntent();
     id = intent.getStringExtra("id");
     if (id.length() > 0) {
+      avi.show();
       getTodo(id);
     }
     todoDateBT.setOnClickListener(new View.OnClickListener(){
@@ -87,7 +92,6 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
     Integer year,month,day;
     if (date.compareTo("Select Date") != 0) {
       List<String> dateAry = Arrays.asList(date.split("-"));
-      Log.d("Date",dateAry.get(0));
       year = Integer.parseInt(dateAry.get(0));
       month = Integer.parseInt((dateAry.get(1))) - 1;
       day = Integer.parseInt((dateAry.get(2)));
@@ -132,6 +136,7 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
           if (status == rdDone.getText().toString()) {
             rdStatus.check(rdDone.getId());
           }
+          avi.hide();
         } catch (JSONException e) {
 
         }

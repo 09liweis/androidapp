@@ -7,25 +7,31 @@
   android:orientation="vertical"
   tools:context=".activities.TodoFormActivity">
 
-  <TextView
-    android:layout_width="match_parent"
+  <com.wang.avi.AVLoadingIndicatorView
+    android:id="@+id/todo_form_avi"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Todo"/>
+    app:indicatorColor="#000000"
+    app:indicatorName="BallPulseIndicator" />
+
   <EditText
+    android:id="@+id/todo_form_name"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/todo_form_name"/>
+    android:layout_height="wrap_content" />
+
   <Button
+    android:id="@+id/todo_form_date"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/todo_form_date"
-    android:text="Select Date"/>
+    android:text="Select Date" />
+
   <RadioGroup
     android:id="@+id/todo_form_status"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_below="@id/todo_form_date"
     android:orientation="horizontal">
+
     <RadioButton
       android:id="@+id/pending"
       android:layout_width="wrap_content"
@@ -38,15 +44,17 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="working" />
+
     <RadioButton
       android:id="@+id/done"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:text="done" />
   </RadioGroup>
+
   <Button
+    android:id="@+id/todo_form_add"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Add Todo"
-    android:id="@+id/todo_form_add"/>
+    android:text="Add Todo" />
 </LinearLayout>
