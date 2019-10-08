@@ -48,8 +48,14 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataVi
   @Override
   public void onBindViewHolder(DataViewHolder holder, int position) {
     Todo todo = todoList.get(position);
-    holder.todoName.setText(todo.getName() + " - " + todo.getDate());
+    holder.todoName.setText(todo.getName());
     holder.todoStatus.setText(todo.getStatus());
+    String date = todo.getDate();
+    if (date == null) {
+      holder.todoDate.setVisibility(View.GONE);
+    } else {
+      holder.todoDate.setText(date);
+    }
   }
 
   @Override
@@ -60,10 +66,12 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataVi
   public static class DataViewHolder extends RecyclerView.ViewHolder{
     TextView todoName;
     TextView todoStatus;
+    TextView todoDate;
     public DataViewHolder(View itemView) {
       super(itemView);
       todoName = itemView.findViewById(R.id.todo_name);
       todoStatus = itemView.findViewById(R.id.todo_status);
+      todoDate = itemView.findViewById(R.id.todo_date);
     }
   }
 }
