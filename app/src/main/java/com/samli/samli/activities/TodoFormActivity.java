@@ -87,9 +87,9 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
   }
   private void showDatePickerDialog() {
     String date = todoDateBT.getText().toString();
-    Integer year = Calendar.getInstance().get(Calendar.YEAR);
-    Integer month = Calendar.getInstance().get(Calendar.MONTH);
-    Integer day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+    int year = Calendar.getInstance().get(Calendar.YEAR);
+    int month = Calendar.getInstance().get(Calendar.MONTH);
+    int day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     if (date.compareTo("Select Date") != 0) {
       List<String> dateAry = Arrays.asList(date.split("-"));
       year = Integer.parseInt(dateAry.get(0));
