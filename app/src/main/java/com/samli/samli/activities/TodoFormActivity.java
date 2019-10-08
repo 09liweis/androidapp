@@ -1,7 +1,6 @@
 package com.samli.samli.activities;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.icu.util.Calendar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +12,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.samli.samli.R;
+import com.samli.samli.models.Util;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import android.os.Bundle;
@@ -23,7 +23,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -70,8 +69,7 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
 
     Intent intent = getIntent();
     id = intent.getStringExtra("id");
-    if (id.length() > 0) {
-      avi.show();
+    if (!id.equals("")) {
       getTodo(id);
     }
     todoDateBT.setOnClickListener(new View.OnClickListener(){
@@ -83,22 +81,20 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
     todoAddBt.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        submitTodo(view);
+        submitTodo();
       }
     });
   }
   private void showDatePickerDialog() {
     String date = todoDateBT.getText().toString();
-    Integer year,month,day;
+    Integer year = Calendar.getInstance().get(Calendar.YEAR);
+    Integer month = Calendar.getInstance().get(Calendar.MONTH);
+    Integer day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     if (date.compareTo("Select Date") != 0) {
       List<String> dateAry = Arrays.asList(date.split("-"));
       year = Integer.parseInt(dateAry.get(0));
       month = Integer.parseInt((dateAry.get(1))) - 1;
       day = Integer.parseInt((dateAry.get(2)));
-    } else {
-      year = Calendar.getInstance().get(Calendar.YEAR);
-      month = Calendar.getInstance().get(Calendar.MONTH);
-      day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
     }
     DatePickerDialog datePickerDialog = new DatePickerDialog(
             this,
@@ -119,26 +115,26 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
   }
 
   protected void getTodo(String id) {
+    avi.show();
     JsonObjectRequest sr = new JsonObjectRequest(Request.Method.GET, url + id,null, new Response.Listener<JSONObject>() {
       @Override
-      public void onResponse(JSONObject res) {
+      public void onResponse(JSONObject todo) {
         try {
-          JSONObject todo = res;
           todoNameET.setText(todo.getString("name"));
           todoDateBT.setText(todo.getString("date"));
           String status = todo.getString("status");
-          if (status == rdPending.getText().toString()) {
+          if (status.equals(rdPending.getText().toString())) {
             rdStatus.check(rdPending.getId());
           }
-          if (status == rdWorking.getText().toString()) {
+          if (status.equals(rdWorking.getText().toString())) {
             rdStatus.check(rdWorking.getId());
           }
-          if (status == rdDone.getText().toString()) {
+          if (status.equals(rdDone.getText().toString())) {
             rdStatus.check(rdDone.getId());
           }
           avi.hide();
         } catch (JSONException e) {
-
+          Util.showToast(TodoFormActivity.this,e.toString());
         }
       }
 
@@ -153,7 +149,7 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
   }
 
 
-  protected void submitTodo(final View view) {
+  protected void submitTodo() {
     int method = Request.Method.POST;
     JSONObject params = new JSONObject();
     try {
@@ -167,19 +163,20 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
         url = url + id;
       }
     } catch (JSONException e) {
-
+      Util.showToast(TodoFormActivity.this,e.toString());
     }
 
     JsonObjectRequest sr = new JsonObjectRequest(method, url, params,new Response.Listener<JSONObject>() {
       @Override
       public void onResponse(JSONObject response) {
-        Toast.makeText(TodoFormActivity.this, "Success", Toast.LENGTH_SHORT).show();
+        Util.showToast(TodoFormActivity.this,"Success");
         finish();
       }
     },
     new Response.ErrorListener() {
       @Override
       public void onErrorResponse(VolleyError error) {
+        Util.showToast(TodoFormActivity.this,error.toString());
       }
     });
     requestQueue = Volley.newRequestQueue(getApplicationContext());
