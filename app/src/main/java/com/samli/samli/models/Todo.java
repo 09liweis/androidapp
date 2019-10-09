@@ -2,37 +2,33 @@ package com.samli.samli.models;
 import java.util.ArrayList;
 
 public class Todo {
-    String name;
-    String _id;
-    String status;
-    ArrayList<Step> steps;
-    String date;
-    public Todo() {
+  private String name;
+  private String _id;
+  private String status;
+  private ArrayList<Todo> steps;
+  private String date;
+  private Transaction transaction;
+  public Todo() {}
 
-    }
+  public String getId() {
+    return _id;
+  }
 
-    public Todo(String _id, String name) {
-        this._id = _id;
-        this.name = name;
-    }
+  public void setId(String id) {
+    this._id = id;
+  }
 
-    public String getId() {
-        return _id;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setId(String id) {
-        this._id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getStatus() {return status;}
-    public void setStatus(String status) {this.status = status;}
-    public String getDate(){return date;}
-    public void setDate(String date) {this.date = date;}
+  public void setName(String name) {
+    this.name = name;
+  }
+  public String getStatus() {return status;}
+  public void setStatus(String status) {this.status = status;}
+  public String getDate(){return date;}
+  public void setDate(String date) {this.date = date;}
+  public Transaction getTransaction() {return transaction;}
+  public void setTransaction(Transaction transaction) {this.transaction = transaction;}
 }
