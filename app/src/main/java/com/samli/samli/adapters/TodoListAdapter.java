@@ -6,11 +6,22 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.samli.samli.R;
 import com.samli.samli.activities.TodoFormActivity;
 import com.samli.samli.models.Todo;
+import com.samli.samli.models.Util;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -18,6 +29,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataVi
 
   private Context mContext;
   private ArrayList<Todo> todoList;
+  String url = "https://samliweisen.herokuapp.com/api/todos/";
+  RequestQueue requestQueue;
 
   public TodoListAdapter(Context mContext, ArrayList<Todo> todoList) {
     this.mContext = mContext;
@@ -46,8 +59,8 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataVi
   }
 
   @Override
-  public void onBindViewHolder(DataViewHolder holder, int position) {
-    Todo todo = todoList.get(position);
+  public void onBindViewHolder(DataViewHolder holder, final int position) {
+    final Todo todo = todoList.get(position);
     holder.todoName.setText(todo.getName());
     holder.todoStatus.setText(todo.getStatus());
     String date = todo.getDate();
@@ -56,6 +69,32 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataVi
     } else {
       holder.todoDate.setText(date);
     }
+    holder.todoDelete.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        deleteTodo(position,todo.getId());
+      }
+    });
+  }
+
+  public void deleteTodo(final int i, String id) {
+    JsonObjectRequest sr = new JsonObjectRequest(Request.Method.DELETE, url + id,null, new Response.Listener<JSONObject>() {
+      @Override
+      public void onResponse(JSONObject todo) {
+        todoList.remove(i);
+        notifyItemRemoved(i);
+        notifyDataSetChanged();
+        Util.showToast(mContext,"Delete todo " + i + " Success");
+      }
+
+    }, new Response.ErrorListener() {
+      @Override
+      public void onErrorResponse(VolleyError error) {
+        Util.showToast(mContext,error.toString());
+      }
+    });
+    requestQueue = Volley.newRequestQueue(mContext);
+    requestQueue.add(sr);
   }
 
   @Override
@@ -67,11 +106,13 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataVi
     TextView todoName;
     TextView todoStatus;
     TextView todoDate;
+    Button todoDelete;
     public DataViewHolder(View itemView) {
       super(itemView);
       todoName = itemView.findViewById(R.id.todo_name);
       todoStatus = itemView.findViewById(R.id.todo_status);
       todoDate = itemView.findViewById(R.id.todo_date);
+      todoDelete = itemView.findViewById(R.id.todo_delete);
     }
   }
 }
