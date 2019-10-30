@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
 
     <color name="white">#FFFFFF</color>
+    <color name="done">#34b934</color>
+    <color name="working">#979701</color>
+    <color name="pending">#dd2c00</color>
 </resources>

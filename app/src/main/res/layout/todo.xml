@@ -10,33 +10,40 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/cv">
-    <RelativeLayout
+    <LinearLayout
       android:layout_width="match_parent"
-      android:layout_height="wrap_content"
-      android:padding="16dp">
-      <TextView
+      android:layout_height="wrap_content">
+      <LinearLayout
+        android:minWidth="5dp"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/todo_name"
-        android:textColor="#332D2D"
-        android:layout_alignParentTop="true"
-        android:textSize="20sp" />
-      <TextView
+        android:layout_height="match_parent"
+        android:id="@+id/todo_status"></LinearLayout>
+      <LinearLayout
+        android:padding="10dp"
+        android:orientation="vertical"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/todo_status"
-        android:layout_below="@+id/todo_name" />
-      <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/todo_date"
-        android:layout_below="@+id/todo_status" />
+        android:layout_height="wrap_content">
+        <TextView
+          android:maxWidth="300dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/todo_name"
+          android:textColor="#332D2D"
+          android:layout_alignParentTop="true"
+          android:textSize="20sp" />
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/todo_date"
+          android:layout_below="@+id/todo_status" />
+      </LinearLayout>
       <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/todo_date"
-        android:text="Del"
+        android:text="Delete"
         android:id="@+id/todo_delete" />
-    </RelativeLayout>
+    </LinearLayout>
   </android.support.v7.widget.CardView>
 </LinearLayout>

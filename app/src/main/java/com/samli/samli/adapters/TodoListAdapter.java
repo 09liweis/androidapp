@@ -2,6 +2,7 @@ package com.samli.samli.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,7 +63,15 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataVi
   public void onBindViewHolder(DataViewHolder holder, final int position) {
     final Todo todo = todoList.get(position);
     holder.todoName.setText(todo.getName());
-    holder.todoStatus.setText(todo.getStatus());
+    String status = todo.getStatus();
+    int color = R.color.pending;
+    if (status.equals("done")) {
+      color = R.color.done;
+    }
+    if (status.equals("working")) {
+      color = R.color.working;
+    }
+    holder.todoStatus.setBackgroundColor(ContextCompat.getColor(mContext,color));
     String date = todo.getDate();
     if (date == null) {
       holder.todoDate.setVisibility(View.GONE);
@@ -104,7 +113,7 @@ public class TodoListAdapter extends RecyclerView.Adapter<TodoListAdapter.DataVi
 
   public static class DataViewHolder extends RecyclerView.ViewHolder{
     TextView todoName;
-    TextView todoStatus;
+    View todoStatus;
     TextView todoDate;
     Button todoDelete;
     public DataViewHolder(View itemView) {
