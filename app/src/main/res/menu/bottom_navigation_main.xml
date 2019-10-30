@@ -2,20 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/navigation_transactions"
-        android:enabled="true"
-        android:title="Transactions"
-        app:showAsAction="ifRoom" />
-    <item
         android:id="@+id/navigation_todos"
         android:enabled="true"
         android:title="Todos"
         app:showAsAction="ifRoom" />
-    <!--<item-->
-        <!--android:id="@+id/navigation_visuals"-->
-        <!--android:enabled="true"-->
-        <!--android:title="Movies"-->
-        <!--app:showAsAction="ifRoom"/>-->
+    <item
+        android:id="@+id/navigation_transactions"
+        android:enabled="true"
+        android:title="Transactions"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/navigation_visuals"
         android:enabled="true"

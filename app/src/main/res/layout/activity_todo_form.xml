@@ -52,6 +52,19 @@
       android:text="done" />
   </RadioGroup>
 
+  <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Step"/>
+  <EditText
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/step_name"/>
+  <Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/step_add"
+    android:text="Add Step"/>
   <Button
     android:id="@+id/todo_form_add"
     android:layout_width="match_parent"

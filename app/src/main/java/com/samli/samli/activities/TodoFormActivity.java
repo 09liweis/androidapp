@@ -34,6 +34,8 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
 
   EditText todoNameET;
   Button todoDateBT;
+  EditText stepNameET;
+  Button stepAddBT;
   Button todoAddBt;
   RadioGroup rdStatus;
   RadioButton rdPending;
@@ -53,6 +55,9 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
     todoDateBT = findViewById(R.id.todo_form_date);
     todoAddBt = findViewById(R.id.todo_form_add);
 
+    stepNameET = findViewById(R.id.step_name);
+    stepAddBT = findViewById(R.id.step_add);
+
     rdStatus = findViewById(R.id.todo_form_status);
     rdPending = findViewById(R.id.pending);
     rdWorking = findViewById(R.id.working);
@@ -60,12 +65,12 @@ public class TodoFormActivity extends AppCompatActivity implements DatePickerDia
 
     avi = findViewById(R.id.todo_form_avi);
 
-    rdStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-      @Override
-      public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
-      }
-    });
+//    rdStatus.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//      @Override
+//      public void onCheckedChanged(RadioGroup radioGroup, int i) {
+//
+//      }
+//    });
 
     Intent intent = getIntent();
     id = intent.getStringExtra("id");

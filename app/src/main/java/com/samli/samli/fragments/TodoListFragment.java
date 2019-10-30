@@ -101,21 +101,21 @@ public class TodoListFragment extends Fragment {
 
   public void getTodoList() {
     JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(todoAPI,
-            new Response.Listener<JSONArray>() {
-              @Override
-              public void onResponse(JSONArray jsonArray) {
-                avi.hide();
-                handleTodoJSON(jsonArray);
-              }
+      new Response.Listener<JSONArray>() {
+        @Override
+        public void onResponse(JSONArray jsonArray) {
+          avi.hide();
+          handleTodoJSON(jsonArray);
+        }
 
-            },
-            new Response.ErrorListener() {
-              @Override
-              public void onErrorResponse(VolleyError error) {
-                getTodoList();
-                Toast.makeText(getContext().getApplicationContext(), "Unable to fetch data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-              }
-            }
+      },
+      new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+          getTodoList();
+          Toast.makeText(getContext().getApplicationContext(), "Unable to fetch data: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+      }
     );
     requestQueue = Volley.newRequestQueue(getContext().getApplicationContext());
     requestQueue.add(jsonArrayRequest);
@@ -130,9 +130,9 @@ public class TodoListFragment extends Fragment {
         todo.setId(json.getString("_id"));
         todo.setName(json.getString("name"));
         todo.setStatus(json.getString("status"));
-        String date = json.getString("date");
-        if (!date.isEmpty()) {
-          todo.setDate(json.getString("date"));
+        String date = json.optString("date");
+        if (date != null) {
+          todo.setDate(date);
         }
       } catch (JSONException e) {
         e.printStackTrace();
