@@ -13,38 +13,38 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class HttpRequest {
-    RequestQueue requestQueue;
-    Context mContext;
-    String url;
+  private RequestQueue requestQueue;
+  private Context mContext;
+  private String url;
 
-    public HttpRequest(Context mContext, RequestQueue requestQueue, String url) {
-        this.requestQueue = requestQueue;
-        this.mContext = mContext;
-        this.url = url;
-    }
+  public HttpRequest(Context mContext, RequestQueue requestQueue, String url) {
+    this.requestQueue = requestQueue;
+    this.mContext = mContext;
+    this.url = url;
+  }
 
-    public JSONObject getJSONObject(final String key) {
-        JSONObject jsonObject = new JSONObject();
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        try {
-                            jsonObject = jsonObject.getJSONObject(key);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
+  public JSONObject getJSONObject(final String key) {
+    JSONObject jsonObject = new JSONObject();
+    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+      new Response.Listener<JSONObject>() {
+        @Override
+        public void onResponse(JSONObject jsonObject) {
+          try {
+            jsonObject = jsonObject.getJSONObject(key);
+          } catch (JSONException e) {
+            e.printStackTrace();
+          }
+        }
 
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
-                });
-        requestQueue = Volley.newRequestQueue(mContext);
-        requestQueue.add(jsonObjectRequest);
-        return jsonObject;
+      },
+      new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+        }
+      });
+    requestQueue = Volley.newRequestQueue(mContext);
+    requestQueue.add(jsonObjectRequest);
+    return jsonObject;
 
-    }
+  }
 }
